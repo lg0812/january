@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="jquery-3.1.0.min.js"></script>
+<script type="text/javascript" src="bootstrap-paginator.js"></script>
+<script type="text/javascript" src="Switch.js"></script>
+<!-- <script type="text/javascript" src="honeySwitch.js"></script> -->
+<link rel="stylesheet" href="bootstrap.css">
+<link rel="stylesheet" href="Switch.css">
+</head>
+<body>
+	<div class='switch-on'></div>
+	<div class='switch-on'></div>
+	<div class='switch-on'></div>
+
+
+
+	<input class="hide" type="file" id="fileUpload"
+		onchange="readPic(this)">
+	<button class="btn btn-default" id="chooseBtn"
+		onclick="choosePic(this)">choose</button>
+	<button class="btn btn-primary" id="compressBtn"
+		onclick="compressPic(this)">compress</button>
+
+	<canvas id="canvas"></canvas>
+	<div
+		style="width: 400px; height: 400px; border: 1px silver solid; position: relative;">
+		<img alt="" src="" style="width: 100%; height: auto;" id="disPic">
+	</div>
+	<script type="text/javascript">
+		var canvasImg = new Image();
+		function choosePic(e) {
+			$("#fileUpload").click();
+		}
+
+		function readPic(e) {
+			var oFReader = new FileReader();
+			var rFilter = /^(?:image\/bmp|image\/cis\-cod|image\/gif|image\/ief|image\/jpeg|image\/jpeg|image\/jpeg|image\/pipeg|image\/png|image\/svg\+xml|image\/tiff|image\/x\-cmu\-raster|image\/x\-cmx|image\/x\-icon|image\/x\-portable\-anymap|image\/x\-portable\-bitmap|image\/x\-portable\-graymap|image\/x\-portable\-pixmap|image\/x\-rgb|image\/x\-xbitmap|image\/x\-xpixmap|image\/x\-xwindowdump)$/i;
+
+			oFReader.onload = function(oFREvent) {
+				$("#disPic").attr("src", oFREvent.target.result);
+				canvasImg.src = oFREvent.target.result;
+			};
+
+			console.log(e)
+			var oFile = e.files[0];
+			if (!rFilter.test(oFile.type)) {
+				alert("You must select a valid image file!");
+				return;
+			}
+			oFReader.readAsDataURL(oFile);
+			$("#fileUpload").val("");
+		}
+
+		function compressPic(e) {
+			var dic = canvasImg.height / canvasImg.width;
+			//	var img = $("#disPic").attr("src");
+			var canvas = document.getElementById("canvas");
+			var pen = canvas.getContext("2d");
+			console.log(canvasImg.width, canvasImg.height)
+			pen.clearRect(0, 0, 200, 200 * dic);
+			pen.drawImage(document.getElementById("disPic"), 0, 0, 200 * dic);
+			var src = canvas.toDataURL("image/jpeg", 0.5)
+			$("#disPic").attr("src", src);
+		}
+	</script>
+</body>
+</html>

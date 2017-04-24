@@ -1,0 +1,10 @@
+closeQuietly 无条件关闭io流
+contentEquals(InputStream input1, InputStream input2)  比较两个输入的内容是否相同
+copy(InputStream input, Writer output, String encoding)
+eadLines(InputStream input, String encoding) 获得输入流的每一行的内容，返回一个list
+skip(InputStream input, long toSkip) 从头部开始跳过多少字节开始读取数据
+......
+
+
+FileSystemUtils
+freeSpaceKb(String path)  返回磁盘的剩余空间字节数
