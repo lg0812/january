@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.fluent.Request;
 import org.apache.http.entity.ContentType;
@@ -41,6 +42,7 @@ import com.alibaba.fastjson.JSON;
 import net.sf.json.JSONObject;
 
 @Controller
+@Transactional
 @RequestMapping("/wx")
 public class WeixinController {
 
@@ -183,33 +185,33 @@ public class WeixinController {
 		return sb.toString();
 	}
 
-//	@ResponseBody
-//	@RequestMapping(value = "/upload", method = RequestMethod.POST)
-//	public String uploadfiles(String imgString, String path) {
-//		SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd/HHmmss");
-//		String timeString = "";
-//		System.out.println(timeString = format.format(new Date()));
-//		File file = new File("/upload/" + format.format(new Date()) + "/");
-//		if (!file.exists()) {
-//			file.mkdirs();
-//		}
-//
-//		try {
-//			// ctrl + alt + T 自动生成try catch 模块
-//			byte[] bytes = new BASE64Decoder().decodeBuffer(imgString);
-//			OutputStream out = new FileOutputStream(new File(file, path));
-//			for (int t = 0; t < bytes.length; t++) {
-//				if (bytes[t] < 0) {
-//					bytes[t] += 256;
-//				}
-//			}
-//			out.write(bytes);
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//			return "faild";
-//		}
-//		return "success";
-//	}
+	// @ResponseBody
+	// @RequestMapping(value = "/upload", method = RequestMethod.POST)
+	// public String uploadfiles(String imgString, String path) {
+	// SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd/HHmmss");
+	// String timeString = "";
+	// System.out.println(timeString = format.format(new Date()));
+	// File file = new File("/upload/" + format.format(new Date()) + "/");
+	// if (!file.exists()) {
+	// file.mkdirs();
+	// }
+	//
+	// try {
+	// // ctrl + alt + T 自动生成try catch 模块
+	// byte[] bytes = new BASE64Decoder().decodeBuffer(imgString);
+	// OutputStream out = new FileOutputStream(new File(file, path));
+	// for (int t = 0; t < bytes.length; t++) {
+	// if (bytes[t] < 0) {
+	// bytes[t] += 256;
+	// }
+	// }
+	// out.write(bytes);
+	// } catch (IOException e) {
+	// e.printStackTrace();
+	// return "faild";
+	// }
+	// return "success";
+	// }
 
 	@RequestMapping("/test_arr")
 	@ResponseBody

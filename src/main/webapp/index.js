@@ -20,14 +20,15 @@ function initMenu() {
 function create_menu() {
 	initMenu();
 }
+
 function create_menu_() {
 	$.ajax({
 		type : "POST",
 		url : "wxCon/create_menu",
-		contentType : "application/json; charset=utf-8",
+		contentType : "application/x-www-form-urlencoded; charset=UTF-8",
 		data : {
-			menu : JSON.stringify(menu)
-		}, // 或者直接使用menuString
+			menu:JSON.stringify(menu)
+			}, // 或者直接使用menuString
 		dataType : "json",
 		success : function(message) {
 			console.log(message)
@@ -35,7 +36,7 @@ function create_menu_() {
 		error : function(message) {
 			console.log(message);
 		}
-	}, "json");
+	});
 }
 var menu = {
 	"button" : [ {

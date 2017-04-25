@@ -25,7 +25,7 @@ public class WxServiceImpl implements WxService {
 	@Override
 	public String create_menu(String menu) throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println("----------------->"+menu);
+		System.out.println("----------------->" + menu);
 		UserToken userToken = (UserToken) sessionFactory.getCurrentSession().createQuery("from UserToken")
 				.uniqueResult();
 		String token = userToken.getAccessToken();
@@ -49,8 +49,8 @@ public class WxServiceImpl implements WxService {
 			str = str.append(new String(bytes));
 		}
 
-		System.out.println(str);
-		return null;
+		System.out.println(str.toString());
+		return str.toString();
 	}
 
 }
