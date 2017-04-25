@@ -32,8 +32,8 @@ public class AccessTokenHelper {
 			http.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 			http.setDoOutput(true);
 			http.setDoInput(true);
-			System.setProperty("sun.net.client.defaultConnectTimeout", "30000");
-			System.setProperty("sun.net.client.defaultReadTimeout", "30000");
+			http.setConnectTimeout(30000);
+			http.setReadTimeout(30000);
 			http.connect();
 			InputStream is = http.getInputStream();
 			int size = is.available();

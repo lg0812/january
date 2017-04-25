@@ -46,7 +46,7 @@ public class WxServiceImpl implements WxService {
 		byte[] bytes = new byte[1024];
 		StringBuffer str = new StringBuffer("");
 		while (is.read(bytes) != -1) {
-			str = str.append(new String(bytes));
+			str = str.append(new String(bytes, 0, bytes.length));
 		}
 
 		System.out.println(str.toString());

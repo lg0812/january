@@ -223,9 +223,8 @@ public class WeixinController {
 	@ResponseBody
 	@RequestMapping(value = "/test_success")
 	public String testSuccess(String str) {
-		System.out.print("--------------");
-		System.out.println(JSON.toJSONString(str));
-		return JSON.toJSONString(str);
+		System.out.print("--------------"+str);
+		return str;
 	}
 
 	@ResponseBody
