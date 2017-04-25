@@ -1,4 +1,4 @@
-package com.Jan.serviceImpl;
+package com.Jan.service.Impl;
 
 import java.io.IOException;
 import java.io.InputStream;
