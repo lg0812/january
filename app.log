@@ -1,0 +1,53 @@
+2017-04-25 16:35:26,738 INFO c.J.w.RequestUtils [main] getRequest params:str=this is a test case! 
+2017-04-25 16:35:26,750 INFO c.J.w.RequestUtils [main]  
+2017-04-25 16:35:51,711 INFO c.J.w.RequestUtils [main] getRequest params:str=this is a test case! 
+2017-04-25 16:35:51,722 INFO c.J.w.RequestUtils [main]  
+2017-04-25 16:42:09,257 INFO c.J.w.RequestUtils [main] getRequest params: 
+2017-04-25 16:42:09,274 INFO c.J.w.RequestUtils [main]  
+2017-04-25 16:43:16,885 INFO c.J.w.RequestUtils [main] getRequest params: 
+2017-04-25 16:43:16,899 INFO c.J.w.RequestUtils [main]  
+2017-04-25 16:43:34,579 INFO c.J.w.RequestUtils [main] getRequest params: 
+2017-04-25 16:43:34,589 INFO c.J.w.RequestUtils [main]  
+2017-04-25 16:44:02,712 INFO c.J.w.RequestUtils [main] getRequest params: 
+2017-04-25 16:44:04,399 INFO c.J.w.RequestUtils [main]  
+2017-04-25 16:44:25,585 INFO c.J.w.RequestUtils [main] getRequest params: 
+2017-04-25 16:44:25,937 INFO c.J.w.RequestUtils [main] "{\"menu\":{\"button\":[{\"type\":\"view\",\"name\":\"我的订单\",\"url\":\"http:\\/\\/ryy-api.xiaokejia.com\\/public\\/html\\/order_list.html\",\"sub_button\":[]},{\"type\":\"view\",\"name\":\"我的积分\",\"url\":\"http:\\/\\/ryy-api.xiaokejia.com\\/public\\/html\\/my_points.html\",\"sub_button\":[]},{\"type\":\"view\",\"name\":\"我最喜欢\",\"url\":\"http:\\/\\/ryy-api.xiaokejia.com\\/public\\/html\\/my_favourite.html\",\"sub_button\":[]}]}}" 
+2017-04-25 16:45:12,450 INFO c.J.w.RequestUtils [main] getRequest params:str=this is a test case! 
+2017-04-25 16:45:12,565 INFO c.J.w.RequestUtils [main]  
+2017-04-25 16:46:08,454 INFO c.J.w.RequestUtils [main] getRequest params:str=this%20is%20a%20test%20case! 
+2017-04-25 16:46:08,568 INFO c.J.w.RequestUtils [main] "\"this is a test case!\"" 
+2017-04-25 16:49:21,114 INFO c.J.w.RequestUtils [main] getRequest params:str=this%20is%20a%20test%20case! 
+2017-04-25 16:49:21,234 INFO c.J.w.RequestUtils [main] "\"this is a test case!\"" 
+2017-04-25 16:51:52,141 INFO c.J.w.RequestUtils [main] getRequest params:str=this+is+a+test+case%21 
+2017-04-25 16:51:52,322 INFO c.J.w.RequestUtils [main] "\"this is a test case!\"" 
+2017-04-25 16:52:03,083 INFO c.J.w.RequestUtils [main] getRequest params:str=this+is+a+test+case%21 
+2017-04-25 16:52:03,190 INFO c.J.w.RequestUtils [main] "\"this is a test case!\"" 
+2017-04-25 16:53:20,592 INFO c.J.w.RequestUtils [main] getRequest params:str=this+is+a+test+case%21 
+2017-04-25 16:53:20,707 INFO c.J.w.RequestUtils [main] "\"this is a test case!\"" 
+2017-04-25 16:54:03,350 INFO c.J.w.RequestUtils [main] getRequest params:str=this+is+a+test+case%21 
+2017-04-25 16:54:03,474 INFO c.J.w.RequestUtils [main] "\"this is a test case!\"" 
+2017-04-25 16:55:09,015 INFO c.J.w.RequestUtils [main] getRequest params:str=this is a test case! 
+2017-04-25 16:55:09,177 INFO c.J.w.RequestUtils [main]  
+2017-04-25 16:56:13,698 INFO c.J.w.RequestUtils [main] getRequest params:str=this is a test case! 
+2017-04-25 16:56:13,710 INFO c.J.w.RequestUtils [main]  
+2017-04-25 16:57:03,742 INFO c.J.w.RequestUtils [main] getRequest params:str=this is a test case! 
+2017-04-25 16:57:03,877 INFO c.J.w.RequestUtils [main] "null" 
+2017-04-25 16:58:16,294 INFO c.J.w.RequestUtils [main] getRequest params:str=this is a test case! 
+2017-04-25 16:58:16,453 INFO c.J.w.RequestUtils [main] "null" 
+2017-04-25 17:01:18,021 INFO c.J.w.RequestUtils [main] getRequest params:str=this+is+a+test+case%21 
+2017-04-25 17:01:18,032 INFO c.J.w.RequestUtils [main]  
+2017-04-25 17:01:57,111 INFO c.J.w.RequestUtils [main] getRequest params:str=this+is+a+test+case%21 
+2017-04-25 17:01:57,279 INFO c.J.w.RequestUtils [main] "\"this is a test case!\"" 
+2017-04-25 17:03:37,315 INFO c.J.w.RequestUtils [main] getRequest params:str=this+is+a+test+case%21 
+2017-04-25 17:03:37,484 INFO c.J.w.RequestUtils [main] getRequest params:str=this+is+a+test+case%21 
+2017-04-25 17:03:37,706 INFO c.J.w.RequestUtils [main] "this is a test case!" 
+2017-04-25 17:03:37,706 INFO c.J.w.RequestUtils [main] "this is a test case!" 
+2017-04-25 17:04:59,026 INFO c.J.w.RequestUtils [main] getRequest params:str=this+is+a+test+case%21 
+2017-04-25 17:04:59,126 INFO c.J.w.RequestUtils [main] http://127.0.0.1:8081/january/wx/test_success?str=this+is+a+test+case%21 
+2017-04-25 17:04:59,143 INFO c.J.w.RequestUtils [main] "this is a test case!" 
+2017-04-25 17:09:21,397 INFO c.J.w.RequestUtils [main] getRequest params:str=this+is+a+test+case%21 
+2017-04-25 17:09:21,611 INFO c.J.w.RequestUtils [main] http://127.0.0.1:8081/january/wx/test_success?str=this+is+a+test+case%21 
+2017-04-25 17:09:21,919 INFO c.J.w.RequestUtils [main] "this is a test case!" 
+2017-04-25 17:09:22,212 INFO c.J.w.RequestUtils [main] getRequest params:str=this+is+a+test+case%21 
+2017-04-25 17:09:22,290 INFO c.J.w.RequestUtils [main] http://127.0.0.1:8081/january/wx/test_success?str=this+is+a+test+case%21 
+2017-04-25 17:09:22,305 INFO c.J.w.RequestUtils [main] "this is a test case!" 
