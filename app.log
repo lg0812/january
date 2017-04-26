@@ -51,3 +51,18 @@
 2017-04-25 17:09:22,212 INFO c.J.w.RequestUtils [main] getRequest params:str=this+is+a+test+case%21 
 2017-04-25 17:09:22,290 INFO c.J.w.RequestUtils [main] http://127.0.0.1:8081/january/wx/test_success?str=this+is+a+test+case%21 
 2017-04-25 17:09:22,305 INFO c.J.w.RequestUtils [main] "this is a test case!" 
+2017-04-25 22:07:19,458 INFO c.J.w.RequestUtils [main] getRequest params:access_token=VMg4cPNtVfq5QeRMy-PIZ_a1C8GX2PMBukOctUTZKJvz-hveMjvzVhAJE7apToIvMjAjRNETXCiCsJgUdkcaUDBe8jvyFS31YHfBl2MPhNuVmsXKvbqUSIk9tMi7piQuHADfAHAOHK 
+2017-04-25 22:07:19,731 INFO c.J.w.RequestUtils [main] https://api.weixin.qq.com/cgi-bin/menu/create?access_token=VMg4cPNtVfq5QeRMy-PIZ_a1C8GX2PMBukOctUTZKJvz-hveMjvzVhAJE7apToIvMjAjRNETXCiCsJgUdkcaUDBe8jvyFS31YHfBl2MPhNuVmsXKvbqUSIk9tMi7piQuHADfAHAOHK 
+2017-04-25 22:07:19,930 INFO c.J.w.RequestUtils [main] {"errcode":44002,"errmsg":"empty post data hint: [EOkm50242vr23]"} 
+2017-04-25 22:08:25,963 INFO c.J.w.RequestUtils [main] getRequest params:access_token=VMg4cPNtVfq5QeRMy-PIZ_a1C8GX2PMBukOctUTZKJvz-hveMjvzVhAJE7apToIvMjAjRNETXCiCsJgUdkcaUDBe8jvyFS31YHfBl2MPhNuVmsXKvbqUSIk9tMi7piQuHADfAHAOHK 
+2017-04-25 22:08:26,220 INFO c.J.w.RequestUtils [main] https://api.weixin.qq.com/cgi-bin/menu/create?access_token=VMg4cPNtVfq5QeRMy-PIZ_a1C8GX2PMBukOctUTZKJvz-hveMjvzVhAJE7apToIvMjAjRNETXCiCsJgUdkcaUDBe8jvyFS31YHfBl2MPhNuVmsXKvbqUSIk9tMi7piQuHADfAHAOHK 
+2017-04-25 22:08:26,412 INFO c.J.w.RequestUtils [main] {"errcode":44002,"errmsg":"empty post data hint: [lszKwa0309vr21]"} 
+2017-04-25 22:09:44,672 INFO c.J.w.RequestUtils [main] getRequest params:access_token=VMg4cPNtVfq5QeRMy-PIZ_a1C8GX2PMBukOctUTZKJvz-hveMjvzVhAJE7apToIvMjAjRNETXCiCsJgUdkcaUDBe8jvyFS31YHfBl2MPhNuVmsXKvbqUSIk9tMi7piQuHADfAHAOHK 
+2017-04-25 22:09:44,926 INFO c.J.w.RequestUtils [main] https://api.weixin.qq.com/cgi-bin/menu/create?access_token=VMg4cPNtVfq5QeRMy-PIZ_a1C8GX2PMBukOctUTZKJvz-hveMjvzVhAJE7apToIvMjAjRNETXCiCsJgUdkcaUDBe8jvyFS31YHfBl2MPhNuVmsXKvbqUSIk9tMi7piQuHADfAHAOHK 
+2017-04-25 22:09:45,480 INFO c.J.w.RequestUtils [main] {"errcode":0,"errmsg":"ok"} 
+2017-04-25 22:25:03,491 INFO c.J.w.RequestUtils [main] getRequest params:access_token=VMg4cPNtVfq5QeRMy-PIZ_a1C8GX2PMBukOctUTZKJvz-hveMjvzVhAJE7apToIvMjAjRNETXCiCsJgUdkcaUDBe8jvyFS31YHfBl2MPhNuVmsXKvbqUSIk9tMi7piQuHADfAHAOHK 
+2017-04-25 22:25:03,743 INFO c.J.w.RequestUtils [main] https://api.weixin.qq.com/cgi-bin/menu/delete?access_token=VMg4cPNtVfq5QeRMy-PIZ_a1C8GX2PMBukOctUTZKJvz-hveMjvzVhAJE7apToIvMjAjRNETXCiCsJgUdkcaUDBe8jvyFS31YHfBl2MPhNuVmsXKvbqUSIk9tMi7piQuHADfAHAOHK 
+2017-04-25 22:25:04,179 INFO c.J.w.RequestUtils [main]  
+2017-04-25 22:25:56,661 INFO c.J.w.RequestUtils [main] getRequest params:access_token=VMg4cPNtVfq5QeRMy-PIZ_a1C8GX2PMBukOctUTZKJvz-hveMjvzVhAJE7apToIvMjAjRNETXCiCsJgUdkcaUDBe8jvyFS31YHfBl2MPhNuVmsXKvbqUSIk9tMi7piQuHADfAHAOHK 
+2017-04-25 22:25:56,917 INFO c.J.w.RequestUtils [main] https://api.weixin.qq.com/cgi-bin/menu/delete?access_token=VMg4cPNtVfq5QeRMy-PIZ_a1C8GX2PMBukOctUTZKJvz-hveMjvzVhAJE7apToIvMjAjRNETXCiCsJgUdkcaUDBe8jvyFS31YHfBl2MPhNuVmsXKvbqUSIk9tMi7piQuHADfAHAOHK 
+2017-04-25 22:25:57,179 INFO c.J.w.RequestUtils [main] {"errcode":0,"errmsg":"ok"} 
