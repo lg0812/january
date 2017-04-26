@@ -33,7 +33,6 @@ public class Wechat4j {
 		while (is.read(bytes) != -1) {
 			str = str.append(new String(bytes));
 		}
-
 		System.out.println(str);
 	}
 }
