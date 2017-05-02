@@ -3,10 +3,22 @@
  */
 package com.Jan.wx.resp;
 
-import javax.xml.bind.annotation.XmlElement;
+import java.util.List;
 
-public class VoiceResponse {
+import javax.xml.bind.annotation.*;
 
-	private String MediaId;
-
+public class VoiceResponse
+{
+  @XmlElement(name="MediaId")
+  private String MediaId;
+  
+  public String getMediaId()
+  {
+    return this.MediaId;
+  }
+  
+  public void setMediaId(String mediaId)
+  {
+    this.MediaId = mediaId;
+  }
 }

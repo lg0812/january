@@ -17,12 +17,10 @@ public class WechatResponse {
 	private String CreateTime;
 	@XmlElement(name = "MsgType")
 	private String MsgType;
-	// 文本消息
 	@XmlElement(name = "Content")
 	private String Content;
 	@XmlElement(name = "ArticleCount")
 	private String ArticleCount;
-
 	@XmlElement(name = "Image")
 	private ImageResponse Image;
 	@XmlElement(name = "Voice")
@@ -36,106 +34,101 @@ public class WechatResponse {
 	private List<ArticleResponse> article;
 
 	public String getToUserName() {
-		return ToUserName;
+		return this.ToUserName;
 	}
 
 	public void setToUserName(String toUserName) {
-		ToUserName = toUserName;
+		this.ToUserName = toUserName;
 	}
 
 	public String getFromUserName() {
-		return FromUserName;
+		return this.FromUserName;
 	}
 
 	public void setFromUserName(String fromUserName) {
-		FromUserName = fromUserName;
+		this.FromUserName = fromUserName;
 	}
 
 	public String getCreateTime() {
-		return CreateTime;
+		return this.CreateTime;
 	}
 
 	public void setCreateTime(String createTime) {
-		CreateTime = createTime;
+		this.CreateTime = createTime;
 	}
 
 	public String getMsgType() {
-		return MsgType;
+		return this.MsgType;
 	}
 
 	public void setMsgType(String msgType) {
-		MsgType = msgType;
+		this.MsgType = msgType;
 	}
 
 	public String getContent() {
-		return Content;
+		return this.Content;
 	}
 
 	public void setContent(String content) {
-		Content = content;
+		this.Content = content;
 	}
 
 	public String getArticleCount() {
-		return ArticleCount;
+		return this.ArticleCount;
 	}
 
 	public void setArticleCount(String articleCount) {
-		ArticleCount = articleCount;
+		this.ArticleCount = articleCount;
 	}
 
 	public ImageResponse getImage() {
-		return Image;
+		return this.Image;
 	}
 
 	public void setImage(ImageResponse image) {
-		Image = image;
+		this.Image = image;
 	}
 
 	public VoiceResponse getVoice() {
-		return Voice;
+		return this.Voice;
 	}
 
 	public void setVoice(VoiceResponse voice) {
-		Voice = voice;
+		this.Voice = voice;
 	}
 
 	public VideoResponse getVideo() {
-		return Video;
+		return this.Video;
 	}
 
 	public void setVideo(VideoResponse video) {
-		Video = video;
+		this.Video = video;
 	}
 
 	public MusicResponse getMusic() {
-		return Music;
+		return this.Music;
 	}
 
 	public void setMusic(MusicResponse music) {
-		Music = music;
+		this.Music = music;
 	}
 
 	@XmlTransient
 	public List<ArticleResponse> getArticle() {
-		return article;
+		return this.article;
 	}
 
 	public void setArticle(List<ArticleResponse> article) {
 		this.article = article;
 	}
 
-	@Override
 	public String toString() {
-		return "WechatResponse [ToUserName=" + ToUserName + ", FromUserName=" + FromUserName + ", CreateTime="
-				+ CreateTime + ", MsgType=" + MsgType + ", Content=" + Content + ", ArticleCount=" + ArticleCount
-				+ ", Image=" + Image + ", Voice=" + Voice + ", Video=" + Video + ", Music=" + Music + ", article="
-				+ article + "]";
+		return "WechatResponse [ToUserName=" + this.ToUserName + ", FromUserName=" + this.FromUserName + ", CreateTime="
+				+ this.CreateTime + ", MsgType=" + this.MsgType + ", Content=" + this.Content + ", ArticleCount="
+				+ this.ArticleCount + ", Image=" + this.Image + ", Voice=" + this.Voice + ", Video=" + this.Video
+				+ ", Music=" + this.Music + ", article=" + this.article + "]";
 	}
-	
-	public static String[] CDATA_TAG = {"ToUserName",
-			"FromUserName","MsgType","Event","MsgId","Content","MediaId","Title","Description","MusicUrl","HQMusicUrl","ThumbMediaId",
-			"PicUrl","Url"
-			};
-		
 
+	public static String[] CDATA_TAG = { "ToUserName", "FromUserName", "MsgType", "Event", "MsgId", "Content",
+			"MediaId", "Title", "Description", "MusicUrl", "HQMusicUrl", "ThumbMediaId", "PicUrl", "Url" };
 }

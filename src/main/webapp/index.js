@@ -7,7 +7,7 @@ function initMenu() {
 		type : "POST",
 		url : "wx/create_menu",
 		contentType : "application/json; charset=utf-8",
-		data : JSON.stringify(menu), // 或者直接使用menuString
+		data : JSON.stringify(menu), // ����?�������������menuString
 		dataType : "json",
 		success : function(message) {
 			console.log(message)
@@ -27,8 +27,8 @@ function create_menu_() {
 		url : "wxCon/create_menu",
 		contentType : "application/x-www-form-urlencoded; charset=UTF-8",
 		data : {
-			menu:JSON.stringify(menu)
-			}, // 或者直接使用menuString
+			menu : JSON.stringify(menu)
+		}, // ����?�������������menuString
 		dataType : "json",
 		success : function(message) {
 			console.log(message)
@@ -41,20 +41,20 @@ function create_menu_() {
 var menu = {
 	"button" : [ {
 		"type" : "view",
-		"name" : "我的订单",
+		"name" : "������������",
 		"url" : "http://ryy-api.xiaokejia.com/public/html/order_list.html"
 	}, {
 		"type" : "view",
-		"name" : "我的积分",
+		"name" : "������������",
 		"url" : "http://ryy-api.xiaokejia.com/public/html/my_points.html"
 	}, {
 		"type" : "view",
-		"name" : "我最喜欢",
+		"name" : "������������",
 		"url" : "http://ryy-api.xiaokejia.com/public/html/my_favourite.html"
 	} ]
 }
 
-var menuString = '{"button":[{"name":"123心","sub_button":[{"type":"click","name":"运营中心","key":"test001"},{"type":"click","name":"认证流程","key":"test004"},{"type":"click","name":"账号安全","key":"type005"}]},{"name":"帮助中心","sub_button":[{"type":"view","name":"wiki","url":"https://mp.weixin.qq.com/wiki"},{"type":"scancode_push","name":"扫一扫","key":"test002","sub_button":[]}]},{"name":"我的账号","sub_button":[{"type":"view","name":"首页","url":"http://zkh.successinfo.com.cn/january/"},{"type":"location_select","name":"群发","key":"test003"}]}]}'
+var menuString = '{"button":[{"name":"123��?","sub_button":[{"type":"click","name":"������������","key":"test001"},{"type":"click","name":"������������","key":"test004"},{"type":"click","name":"������������","key":"type005"}]},{"name":"������������","sub_button":[{"type":"view","name":"wiki","url":"https://mp.weixin.qq.com/wiki"},{"type":"scancode_push","name":"��������?","key":"test002","sub_button":[]}]},{"name":"������������","sub_button":[{"type":"view","name":"������","url":"http://zkh.successinfo.com.cn/january/"},{"type":"location_select","name":"������","key":"test003"}]}]}'
 function sendmsg(this_) {
 	$.post("RabbitMQUtils/send_info", {
 		info : $(this_).prev().val()
@@ -82,4 +82,13 @@ function sendArr() {
 			console.log(data);
 		},
 	}, "json")
+}
+
+function compare(flag) {
+	$.get("wx/verification?signature=abc&timestamp=bcd&nonce=cde&echostr=def",
+			function(data) {
+				console.log(data,typeof data,data.length);
+				$("#string_show").empty();
+				$("#string_show").append(data);
+			});
 }

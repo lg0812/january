@@ -4,7 +4,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "xml")
-public class WechatReuqest {
+public class WechatRequest {
 	@XmlElement(name = "ToUserName")
 	private String ToUserName;
 	@XmlElement(name = "FromUserName")
@@ -15,22 +15,16 @@ public class WechatReuqest {
 	private String MsgType;
 	@XmlElement(name = "MsgId")
 	private String MsgId;
-
-	// 文本
 	@XmlElement(name = "Content")
 	private String Content;
-	// 图片
 	@XmlElement(name = "PicUrl")
 	private String PicUrl;
 	@XmlElement(name = "MediaId")
 	private String MediaId;
-	// 语音 + MediaId
 	@XmlElement(name = "Format")
 	private String Format;
-	// 视频 + MediaId
 	@XmlElement(name = "ThumbMediaId")
 	private String ThumbMediaId;
-	// 地理
 	@XmlElement(name = "Location_X")
 	private String Location_X;
 	@XmlElement(name = "Location_Y")
@@ -39,236 +33,227 @@ public class WechatReuqest {
 	private String Scale;
 	@XmlElement(name = "Label")
 	private String Label;
-	// 链接
 	@XmlElement(name = "Title")
 	private String Title;
 	@XmlElement(name = "Description")
 	private String Description;
 	@XmlElement(name = "Url")
 	private String Url;
-	// subscribe(订阅)、unsubscribe(取消订阅)
 	@XmlElement(name = "Event")
 	private String Event;
-	// 扫码关注/未关注 + event
 	@XmlElement(name = "EventKey")
 	private String EventKey;
 	@XmlElement(name = "Ticket")
 	private String Ticket;
-	// 上报地理位置+event
 	@XmlElement(name = "Latitude")
 	private String Latitude;
-	@XmlElement(name = "Longitude") // 上报地理位置事件Latitude
+	@XmlElement(name = "Longitude")
 	private String Longitude;
-	@XmlElement(name = "Precision") // 上报地理位置事件Longitude
+	@XmlElement(name = "Precision")
 	private String Precision;
-	// 上报地理位置事件Precision
-	// 自定义菜单事件 + event + eventKey
-	// 点击菜单跳转链接时的事件推送+ event + eventKey
-	// 事件推送状态
 	@XmlElement(name = "Status")
 	private String Status;
 
 	public String getToUserName() {
-		return ToUserName;
+		return this.ToUserName;
 	}
 
 	public void setToUserName(String toUserName) {
-		ToUserName = toUserName;
+		this.ToUserName = toUserName;
 	}
 
 	public String getFromUserName() {
-		return FromUserName;
+		return this.FromUserName;
 	}
 
 	public void setFromUserName(String fromUserName) {
-		FromUserName = fromUserName;
+		this.FromUserName = fromUserName;
 	}
 
 	public String getCreateTime() {
-		return CreateTime;
+		return this.CreateTime;
 	}
 
 	public void setCreateTime(String createTime) {
-		CreateTime = createTime;
+		this.CreateTime = createTime;
 	}
 
 	public String getMsgType() {
-		return MsgType;
+		return this.MsgType;
 	}
 
 	public void setMsgType(String msgType) {
-		MsgType = msgType;
+		this.MsgType = msgType;
 	}
 
 	public String getMsgId() {
-		return MsgId;
+		return this.MsgId;
 	}
 
 	public void setMsgId(String msgId) {
-		MsgId = msgId;
+		this.MsgId = msgId;
 	}
 
 	public String getContent() {
-		return Content;
+		return this.Content;
 	}
 
 	public void setContent(String content) {
-		Content = content;
+		this.Content = content;
 	}
 
 	public String getPicUrl() {
-		return PicUrl;
+		return this.PicUrl;
 	}
 
 	public void setPicUrl(String picUrl) {
-		PicUrl = picUrl;
+		this.PicUrl = picUrl;
 	}
 
 	public String getMediaId() {
-		return MediaId;
+		return this.MediaId;
 	}
 
 	public void setMediaId(String mediaId) {
-		MediaId = mediaId;
+		this.MediaId = mediaId;
 	}
 
 	public String getFormat() {
-		return Format;
+		return this.Format;
 	}
 
 	public void setFormat(String format) {
-		Format = format;
+		this.Format = format;
 	}
 
 	public String getThumbMediaId() {
-		return ThumbMediaId;
+		return this.ThumbMediaId;
 	}
 
 	public void setThumbMediaId(String thumbMediaId) {
-		ThumbMediaId = thumbMediaId;
+		this.ThumbMediaId = thumbMediaId;
 	}
 
 	public String getLocation_X() {
-		return Location_X;
+		return this.Location_X;
 	}
 
 	public void setLocation_X(String location_X) {
-		Location_X = location_X;
+		this.Location_X = location_X;
 	}
 
 	public String getLocation_Y() {
-		return Location_Y;
+		return this.Location_Y;
 	}
 
 	public void setLocation_Y(String location_Y) {
-		Location_Y = location_Y;
+		this.Location_Y = location_Y;
 	}
 
 	public String getScale() {
-		return Scale;
+		return this.Scale;
 	}
 
 	public void setScale(String scale) {
-		Scale = scale;
+		this.Scale = scale;
 	}
 
 	public String getLabel() {
-		return Label;
+		return this.Label;
 	}
 
 	public void setLabel(String label) {
-		Label = label;
+		this.Label = label;
 	}
 
 	public String getTitle() {
-		return Title;
+		return this.Title;
 	}
 
 	public void setTitle(String title) {
-		Title = title;
+		this.Title = title;
 	}
 
 	public String getDescription() {
-		return Description;
+		return this.Description;
 	}
 
 	public void setDescription(String description) {
-		Description = description;
+		this.Description = description;
 	}
 
 	public String getUrl() {
-		return Url;
+		return this.Url;
 	}
 
 	public void setUrl(String url) {
-		Url = url;
+		this.Url = url;
 	}
 
 	public String getEvent() {
-		return Event;
+		return this.Event;
 	}
 
 	public void setEvent(String event) {
-		Event = event;
+		this.Event = event;
 	}
 
 	public String getEventKey() {
-		return EventKey;
+		return this.EventKey;
 	}
 
 	public void setEventKey(String eventKey) {
-		EventKey = eventKey;
+		this.EventKey = eventKey;
 	}
 
 	public String getTicket() {
-		return Ticket;
+		return this.Ticket;
 	}
 
 	public void setTicket(String ticket) {
-		Ticket = ticket;
+		this.Ticket = ticket;
 	}
 
 	public String getLatitude() {
-		return Latitude;
+		return this.Latitude;
 	}
 
 	public void setLatitude(String latitude) {
-		Latitude = latitude;
+		this.Latitude = latitude;
 	}
 
 	public String getLongitude() {
-		return Longitude;
+		return this.Longitude;
 	}
 
 	public void setLongitude(String longitude) {
-		Longitude = longitude;
+		this.Longitude = longitude;
 	}
 
 	public String getPrecision() {
-		return Precision;
+		return this.Precision;
 	}
 
 	public void setPrecision(String precision) {
-		Precision = precision;
+		this.Precision = precision;
 	}
 
 	public String getStatus() {
-		return Status;
+		return this.Status;
 	}
 
 	public void setStatus(String status) {
-		Status = status;
+		this.Status = status;
 	}
 
-	@Override
 	public String toString() {
-		return "WechatReuqest [ToUserName=" + ToUserName + ", FromUserName=" + FromUserName + ", CreateTime="
-				+ CreateTime + ", MsgType=" + MsgType + ", MsgId=" + MsgId + ", Content=" + Content + ", PicUrl="
-				+ PicUrl + ", MediaId=" + MediaId + ", Format=" + Format + ", ThumbMediaId=" + ThumbMediaId
-				+ ", Location_X=" + Location_X + ", Location_Y=" + Location_Y + ", Scale=" + Scale + ", Label=" + Label
-				+ ", Title=" + Title + ", Description=" + Description + ", Url=" + Url + ", Event=" + Event
-				+ ", EventKey=" + EventKey + ", Ticket=" + Ticket + ", Latitude=" + Latitude + ", Longitude="
-				+ Longitude + ", Precision=" + Precision + ", Status=" + Status + "]";
+		return "WechatReuqest [ToUserName=" + this.ToUserName + ", FromUserName=" + this.FromUserName + ", CreateTime="
+				+ this.CreateTime + ", MsgType=" + this.MsgType + ", MsgId=" + this.MsgId + ", Content=" + this.Content
+				+ ", PicUrl=" + this.PicUrl + ", MediaId=" + this.MediaId + ", Format=" + this.Format
+				+ ", ThumbMediaId=" + this.ThumbMediaId + ", Location_X=" + this.Location_X + ", Location_Y="
+				+ this.Location_Y + ", Scale=" + this.Scale + ", Label=" + this.Label + ", Title=" + this.Title
+				+ ", Description=" + this.Description + ", Url=" + this.Url + ", Event=" + this.Event + ", EventKey="
+				+ this.EventKey + ", Ticket=" + this.Ticket + ", Latitude=" + this.Latitude + ", Longitude="
+				+ this.Longitude + ", Precision=" + this.Precision + ", Status=" + this.Status + "]";
 	}
-
 }
