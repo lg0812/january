@@ -211,12 +211,8 @@
 			<artifactId>commons-codec</artifactId>
 			<version>1.9</version>
 		</dependency>
-<!-- 
-		<dependency>
-			<groupId>org.springframework.amqp</groupId>
-			<artifactId>spring-rabbit</artifactId>
-			<version>1.7.1.RELEASE</version>
-		</dependency> -->
+		<!-- <dependency> <groupId>org.springframework.amqp</groupId> <artifactId>spring-rabbit</artifactId> 
+			<version>1.7.1.RELEASE</version> </dependency> -->
 
 		<!-- https://mvnrepository.com/artifact/com.alibaba/simpleimage -->
 		<!-- 可用于图片压缩,水印功能 -->
@@ -225,19 +221,15 @@
 			<artifactId>simpleimage</artifactId>
 			<version>1.2.3</version>
 		</dependency>
-
-
-<!-- 		<dependency>
-			<groupId>org.springframework.data</groupId>
-			<artifactId>spring-data-redis</artifactId>
-			<version>1.8.1.RELEASE</version>
-		</dependency> -->
-		<!-- 		
 		<dependency>
-			<groupId>redis.clients</groupId>
-			<artifactId>jedis</artifactId>
-			<version>2.9.0</version>
-		</dependency> -->
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpmime</artifactId>
+			<version>4.5.3</version>
+		</dependency>
+		<!-- <dependency> <groupId>org.springframework.data</groupId> <artifactId>spring-data-redis</artifactId> 
+			<version>1.8.1.RELEASE</version> </dependency> -->
+		<!-- <dependency> <groupId>redis.clients</groupId> <artifactId>jedis</artifactId> 
+			<version>2.9.0</version> </dependency> -->
 	</dependencies>
 	<build>
 		<finalName>january</finalName>
