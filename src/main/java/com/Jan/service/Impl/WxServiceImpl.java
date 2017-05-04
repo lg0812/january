@@ -1,5 +1,6 @@
 package com.Jan.service.Impl;
 
+import com.Jan.Timer.TokenListener;
 import com.Jan.model.MsgType;
 import com.Jan.model.UserToken;
 import com.Jan.model.WxMsg;
@@ -10,12 +11,17 @@ import com.Jan.wx.resp.WechatResponse;
 import com.alibaba.fastjson.JSON;
 import com.sun.org.apache.xml.internal.serialize.OutputFormat;
 import com.sun.org.apache.xml.internal.serialize.XMLSerializer;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.io.Reader;
 import java.net.HttpURLConnection;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -25,15 +31,31 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+
+import org.apache.commons.httpclient.HttpClient;
+import org.apache.commons.io.IOUtils;
+import org.apache.http.HttpEntity;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.fluent.Request;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.utils.URIBuilder;
+import org.apache.http.entity.mime.MultipartEntityBuilder;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.junit.Test;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
 public class WxServiceImpl implements WxService {
+	final Logger log = LogManager.getLogger(WxServiceImpl.class);
 	@Resource
 	public SessionFactory sessionFactory;
 	public WechatResponse wechatResponse;
@@ -99,7 +121,7 @@ public class WxServiceImpl implements WxService {
 			dispatchEvent();
 			break;
 		case text:
-//			onText();
+			// onText();
 			responseNews();
 			break;
 		case image:
@@ -200,4 +222,32 @@ public class WxServiceImpl implements WxService {
 		this.wechatResponse.setArticle(items);
 	}
 
+	@Override
+	public String wx_upload(String access_token, String type, InputStream file) {
+		// TODO Auto-generated method stub
+		String result = null;
+		try {
+			CloseableHttpClient httpclient = HttpClients.createDefault();
+			HttpEntity entity = MultipartEntityBuilder.create().addBinaryBody("media", file).build();
+			HttpPost http = new HttpPost(
+					new URIBuilder().setScheme("https").setHost("api.weixin.qq.com").setPath("/cgi-bin/media/upload")
+							.setParameter("access_token", access_token).setParameter("type", type).build());
+			System.out.println(http.getURI());
+			http.setEntity(entity);
+			result = IOUtils.toString(httpclient.execute(http).getEntity().getContent(), "utf-8");
+		} catch (URISyntaxException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+//		log.debug(result);
+		System.out.println(result);
+		return result;
+	}
+
+	@Test
+	public void t_upload() throws FileNotFoundException {
+		System.out.println(wx_upload(
+				"kqCv9kWBpS-ig27p0aiLsoKpyKrehYoDpxdO6ZYx6gPiN8kfZfTBmarOCI-W0ao81ZW7CCSsTEPBdjrGMdn7oMkqAyvpy1qtXBNN-zUw4LngGhSSrAvdcgWiFrWXWg2tCGJjAGAVZC",
+				"image", new FileInputStream(new File("D:/wx.png"))));
+	}
 }
