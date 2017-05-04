@@ -161,6 +161,7 @@ public class WxServiceImpl implements WxService {
 		return null;
 	}
 
+	@SuppressWarnings("restriction")
 	private XMLSerializer getXMLSerializer(OutputStream os, WechatResponse wxbean) {
 		OutputFormat of = new OutputFormat();
 		formatCDataTag();

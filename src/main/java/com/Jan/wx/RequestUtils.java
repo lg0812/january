@@ -81,7 +81,8 @@ public class RequestUtils {
 			http.setReadTimeout(30000);
 			http.connect();
 			OutputStream os = http.getOutputStream();
-			os.write(body.getBytes());
+			if (body != null)
+				os.write(body.getBytes());
 			bis = new BufferedReader(new InputStreamReader(http.getInputStream(), "utf-8"));
 			String line = "";
 			while ((line = bis.readLine()) != null) {
@@ -101,11 +102,17 @@ public class RequestUtils {
 	private static String getParamsFromMap(Map<String, String> hashMap) throws UnsupportedEncodingException {
 		// TODO Auto-generated method stub
 		String str = "";
+		int t=0;
 		if (hashMap != null) {
 			for (String key : hashMap.keySet()) {
 				String s = hashMap.get(key);
 				System.out.println(s);
-				str = str + key + "=" + URLEncoder.encode(s, "utf-8");
+				if (t!=0){
+					str = str + "&" + key + "=" + URLEncoder.encode(s, "utf-8");
+				}else{
+					str = str + key + "=" + URLEncoder.encode(s, "utf-8");
+				}
+				t++;
 			}
 		}
 		log.info("getRequest params:" + str);
