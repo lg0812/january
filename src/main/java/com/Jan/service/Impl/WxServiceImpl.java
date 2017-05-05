@@ -237,7 +237,7 @@ public class WxServiceImpl implements WxService {
 			byte[] by = new byte[file.available()];
 			file.read(by);
 			CloseableHttpClient httpclient = HttpClients.createDefault();
-			HttpEntity entity = MultipartEntityBuilder.create().addBinaryBody("media", by).build();
+			HttpEntity entity = MultipartEntityBuilder.create().addBinaryBody("media", file).build();
 			HttpPost http = new HttpPost(
 					new URIBuilder().setScheme("https").setHost("api.weixin.qq.com").setPath("/cgi-bin/media/upload")
 							.setParameter("access_token", access_token).setParameter("type", type).build());
@@ -284,8 +284,8 @@ public class WxServiceImpl implements WxService {
 		String result = null;
 		try {
 			CloseableHttpClient httpclient = HttpClients.createDefault();
-			HttpEntity entity = MultipartEntityBuilder.create().addBinaryBody("media", file).addTextBody("type", type)
-					.build();
+			HttpEntity entity = MultipartEntityBuilder.create().addBinaryBody("media", new File("D:/dongman.jpg"))
+					.addTextBody("type", type).build();
 			HttpPost http = new HttpPost(new URIBuilder().setScheme("https").setHost("api.weixin.qq.com")
 					.setPath("/cgi-bin/material/add_material").setParameter("access_token", access_token).build());
 			http.setEntity(entity);
