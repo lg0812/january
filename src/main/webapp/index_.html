@@ -46,7 +46,8 @@
 			enctype="multipart/form-data">
 			<input type="file" name="pictures"> <br> <input
 				type="file" name="pictures"> <br> <input type="file"
-				name="pictures"> <br> <input type="submit" value="������">
+				name="pictures"> <br> <input type="submit"
+				value="������">
 		</form>
 	</div>
 
@@ -157,5 +158,13 @@
 
 	<button class="btn btn-link" onclick="compare()">@ResponseBody</button>
 	<div id="string_show"></div>
+
+
+	<form action="material/upload_temp" method="post"
+		enctype="multipart/form-data">
+		<input name="type" value="image"> <input type="file"
+			name="file">
+		<button type="submit">提交</button>
+	</form>
 </body>
 </html>

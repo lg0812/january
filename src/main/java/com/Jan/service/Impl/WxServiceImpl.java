@@ -25,7 +25,11 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import javax.annotation.Resource;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -36,7 +40,9 @@ import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.fluent.Request;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
@@ -224,30 +230,97 @@ public class WxServiceImpl implements WxService {
 
 	@Override
 	public String wx_upload(String access_token, String type, InputStream file) {
+
 		// TODO Auto-generated method stub
 		String result = null;
 		try {
+			byte[] by = new byte[file.available()];
+			file.read(by);
 			CloseableHttpClient httpclient = HttpClients.createDefault();
-			HttpEntity entity = MultipartEntityBuilder.create().addBinaryBody("media", file).build();
+			HttpEntity entity = MultipartEntityBuilder.create().addBinaryBody("media", by).build();
 			HttpPost http = new HttpPost(
 					new URIBuilder().setScheme("https").setHost("api.weixin.qq.com").setPath("/cgi-bin/media/upload")
 							.setParameter("access_token", access_token).setParameter("type", type).build());
 			System.out.println(http.getURI());
 			http.setEntity(entity);
+			System.out.println(new Date().getTime());
 			result = IOUtils.toString(httpclient.execute(http).getEntity().getContent(), "utf-8");
+			httpclient.close();
 		} catch (URISyntaxException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-//		log.debug(result);
+		// log.debug(result);
 		System.out.println(result);
 		return result;
 	}
 
+	@Override
+	public String media_temp(String acces_token, String mediaId) {
+		// TODO Auto-generated method stub
+		String result = null;
+		try {
+			CloseableHttpClient httpclient = HttpClients.createDefault();
+			HttpGet get = new HttpGet(
+					"https://api.weixin.qq.com/cgi-bin/media/get?access_token=" + acces_token + "&media_id=" + mediaId);
+
+			result = IOUtils.toString(httpclient.execute(get).getEntity().getContent(), "utf-8");
+		} catch (UnsupportedOperationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	@Override
+	public String wx_upload_long(String access_token, String type, InputStream file) {
+		// TODO Auto-generated method stub
+		String result = null;
+		try {
+			CloseableHttpClient httpclient = HttpClients.createDefault();
+			HttpEntity entity = MultipartEntityBuilder.create().addBinaryBody("media", file).addTextBody("type", type)
+					.build();
+			HttpPost http = new HttpPost(new URIBuilder().setScheme("https").setHost("api.weixin.qq.com")
+					.setPath("/cgi-bin/material/add_material").setParameter("access_token", access_token).build());
+			http.setEntity(entity);
+			result = IOUtils.toString(httpclient.execute(http).getEntity().getContent(), "utf-8");
+			httpclient.close();
+			System.out.println("---");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (URISyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
+	}
+
 	@Test
-	public void t_upload() throws FileNotFoundException {
+	public void t_upload() throws IOException {
+		System.out.println(new Date().getTime());
 		System.out.println(wx_upload(
-				"kqCv9kWBpS-ig27p0aiLsoKpyKrehYoDpxdO6ZYx6gPiN8kfZfTBmarOCI-W0ao81ZW7CCSsTEPBdjrGMdn7oMkqAyvpy1qtXBNN-zUw4LngGhSSrAvdcgWiFrWXWg2tCGJjAGAVZC",
+				"qpQro2iK83hp8wS0QKO50ka6cDYy5Xvk5BWgjgzETgFnrzQi_oZRENvAgWKt5gEAgAGI1NSYeEq09wnW_-tbQa4oYtK71YgINkWHqzOnZ7cGOJJIJUwipYqaiMKSsnHWENMeAJALUT",
 				"image", new FileInputStream(new File("D:/wx.png"))));
+
+	}
+
+	// @Test
+	// public void temp_() {
+	// System.out.println(media_temp(
+	// "RuIEdjjVgEijE0lvXFX_q8bNWRM870jv43pDi4ylYJjcX78wKJ0OgCd2taMa3_fJXETSyshun0VO1DR5WBJcBp9eyXVXW9CFt9bNJ-vB4Y2k9aYU_gm8Z3eBKCGMfA-_KUShAAAQAY",
+	// "79Dc9zX7gYj0VamVztpEsssBxc2jc_8USiWTDSJrb8nNraKhBSKcikFxGJVG_S4w"));
+	// }
+	@Test
+	public void test_wx_upload_long() throws FileNotFoundException {
+		System.out.println(wx_upload_long(
+				"RuIEdjjVgEijE0lvXFX_q8bNWRM870jv43pDi4ylYJjcX78wKJ0OgCd2taMa3_fJXETSyshun0VO1DR5WBJcBp9eyXVXW9CFt9bNJ-vB4Y2k9aYU_gm8Z3eBKCGMfA-_KUShAAAQAY",
+				"image", new FileInputStream(new File("D:/dongman.jpg"))));
 	}
 }

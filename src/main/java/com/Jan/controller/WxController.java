@@ -14,7 +14,7 @@ import com.Jan.constant.BaseResp;
 import com.Jan.service.WxService;
 
 @Controller
-@RequestMapping(value = "/wxCon")
+@RequestMapping(value = "/wx_menu")
 public class WxController {
 	@Autowired
 	public WxService wxService;
