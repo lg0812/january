@@ -26,9 +26,15 @@ public interface WxService {
 
 	/* 素材管理 */
 	/* 新增临时素材 */
-	String wx_upload(String token, String type, InputStream file);
+	String wx_upload(String token, String type, File file);
 
 	String media_temp(String toke, String mediaId);
 
-	String wx_upload_long(String token, String type, InputStream file);
+	String wx_upload_long(String token, String type, File file);
+
+	String media_long(String token, String mediaId);
+
+	String get_media_total(String token);
+
+	String get_media_list(String token);
 }

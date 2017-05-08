@@ -5,10 +5,12 @@ import com.Jan.model.MsgType;
 import com.Jan.model.UserToken;
 import com.Jan.model.WxMsg;
 import com.Jan.service.WxService;
+import com.Jan.wx.RequestUtils;
 import com.Jan.wx.req.WechatRequest;
 import com.Jan.wx.resp.ArticleResponse;
 import com.Jan.wx.resp.WechatResponse;
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.sun.org.apache.xml.internal.serialize.OutputFormat;
 import com.sun.org.apache.xml.internal.serialize.XMLSerializer;
 
@@ -36,15 +38,17 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
-import org.apache.commons.httpclient.HttpClient;
+import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
+import org.apache.http.ParseException;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.fluent.Request;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.utils.URIBuilder;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
@@ -229,13 +233,11 @@ public class WxServiceImpl implements WxService {
 	}
 
 	@Override
-	public String wx_upload(String access_token, String type, InputStream file) {
+	public String wx_upload(String access_token, String type, File file) {
 
 		// TODO Auto-generated method stub
 		String result = null;
 		try {
-			byte[] by = new byte[file.available()];
-			file.read(by);
 			CloseableHttpClient httpclient = HttpClients.createDefault();
 			HttpEntity entity = MultipartEntityBuilder.create().addBinaryBody("media", file).build();
 			HttpPost http = new HttpPost(
@@ -279,13 +281,13 @@ public class WxServiceImpl implements WxService {
 	}
 
 	@Override
-	public String wx_upload_long(String access_token, String type, InputStream file) {
+	public String wx_upload_long(String access_token, String type, File file) {
 		// TODO Auto-generated method stub
 		String result = null;
 		try {
 			CloseableHttpClient httpclient = HttpClients.createDefault();
-			HttpEntity entity = MultipartEntityBuilder.create().addBinaryBody("media", new File("D:/dongman.jpg"))
-					.addTextBody("type", type).build();
+			HttpEntity entity = MultipartEntityBuilder.create().addBinaryBody("media", file).addTextBody("type", type)
+					.build();
 			HttpPost http = new HttpPost(new URIBuilder().setScheme("https").setHost("api.weixin.qq.com")
 					.setPath("/cgi-bin/material/add_material").setParameter("access_token", access_token).build());
 			http.setEntity(entity);
@@ -307,7 +309,7 @@ public class WxServiceImpl implements WxService {
 		System.out.println(new Date().getTime());
 		System.out.println(wx_upload(
 				"qpQro2iK83hp8wS0QKO50ka6cDYy5Xvk5BWgjgzETgFnrzQi_oZRENvAgWKt5gEAgAGI1NSYeEq09wnW_-tbQa4oYtK71YgINkWHqzOnZ7cGOJJIJUwipYqaiMKSsnHWENMeAJALUT",
-				"image", new FileInputStream(new File("D:/wx.png"))));
+				"image", new File("D:/wx.png")));
 
 	}
 
@@ -321,6 +323,73 @@ public class WxServiceImpl implements WxService {
 	public void test_wx_upload_long() throws FileNotFoundException {
 		System.out.println(wx_upload_long(
 				"RuIEdjjVgEijE0lvXFX_q8bNWRM870jv43pDi4ylYJjcX78wKJ0OgCd2taMa3_fJXETSyshun0VO1DR5WBJcBp9eyXVXW9CFt9bNJ-vB4Y2k9aYU_gm8Z3eBKCGMfA-_KUShAAAQAY",
-				"image", new FileInputStream(new File("D:/dongman.jpg"))));
+				"image", new File("D:/dongman.jpg")));
+	}
+
+	@Override
+	public String media_long(String token, String mediaId) {
+		String result = null;
+		try {
+			CloseableHttpClient httpclient = HttpClients.createDefault();
+			HttpPost post = new HttpPost(
+					"https://api.weixin.qq.com/cgi-bin/material/batchget_material?access_token=" + token);
+			JSONObject json = new JSONObject();
+			json.put("media_id", mediaId);
+			post.setEntity(new StringEntity(json.toJSONString()));
+			result = EntityUtils.toString(httpclient.execute(post).getEntity());
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	@Override
+	public String get_media_total(String token) {
+		// TODO Auto-generated method stub
+		String result = null;
+		CloseableHttpClient httpclient = HttpClients.createDefault();
+		HttpGet get = new HttpGet("https://api.weixin.qq.com/cgi-bin/material/get_materialcount?access_token=" + token);
+		try {
+			result = EntityUtils.toString(httpclient.execute(get).getEntity());
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	@Override
+	public String get_media_list(String token) {
+		// TODO Auto-generated method stub
+		String result = null;
+		CloseableHttpClient httpclient = HttpClients.createDefault();
+		HttpPost get = new HttpPost(
+				"https://api.weixin.qq.com/cgi-bin/material/batchget_material?access_token=" + token);
+		try {
+			result = EntityUtils.toString(httpclient.execute(get).getEntity());
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
 	}
 }
