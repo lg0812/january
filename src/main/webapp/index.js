@@ -87,8 +87,17 @@ function sendArr() {
 function compare(flag) {
 	$.get("wx/verification?signature=abc&timestamp=bcd&nonce=cde&echostr=def",
 			function(data) {
-				console.log(data,typeof data,data.length);
+				console.log(data, typeof data, data.length);
 				$("#string_show").empty();
 				$("#string_show").append(data);
 			});
+}
+
+function login() {
+	$.post("login/login_in", {
+		username : "LG0812",
+		password : "123456"
+	}, function(data) {
+		console.log(data);
+	})
 }

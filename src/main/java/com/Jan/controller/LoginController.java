@@ -1,0 +1,41 @@
+package com.Jan.controller;
+
+import javax.annotation.Resource;
+
+import org.apache.commons.lang.StringUtils;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.Jan.constant.ApiConsts;
+import com.Jan.constant.BaseResp;
+import com.Jan.model.UserToken;
+import com.Jan.service.LoginService;
+import com.Jan.service.WxService;
+
+@Controller
+@RequestMapping("/login")
+public class LoginController {
+	@Autowired
+	public LoginService loginService;
+
+	@RequestMapping(value = "/login_in", method = RequestMethod.POST)
+	@ResponseBody
+	public BaseResp login_in(String username, String password) {
+		BaseResp baseResp = new BaseResp();
+		if (StringUtils.isEmpty(username) || StringUtils.isEmpty(password)) {
+			baseResp.setCode(ApiConsts.PARAMS_ERROR);
+			baseResp.setResult(null);
+			baseResp.setMessage("username or password is null");
+		} else {
+			baseResp.setCode(ApiConsts.OK);
+			baseResp.setResult(loginService.login(username, password));
+			baseResp.setCode(ApiConsts.OK);
+		}
+		return baseResp;
+	}
+}

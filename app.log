@@ -75,3 +75,12 @@
 2017-05-01 22:19:19,740 INFO c.J.w.RequestUtils [main] getRequest params:str=this+is+a+test+case%21 
 2017-05-01 22:19:19,740 INFO c.J.w.RequestUtils [main] http://127.0.0.1:8081/january/wx/test_success?str=this+is+a+test+case%21 
 2017-05-01 22:19:20,792 INFO c.J.w.RequestUtils [main]  
+2017-05-09 21:29:59,417 INFO c.J.w.RequestUtils [main] getRequest params:access_token=VMg4cPNtVfq5QeRMy-PIZ_a1C8GX2PMBukOctUTZKJvz-hveMjvzVhAJE7apToIvMjAjRNETXCiCsJgUdkcaUDBe8jvyFS31YHfBl2MPhNuVmsXKvbqUSIk9tMi7piQuHADfAHAOHK 
+2017-05-09 21:29:59,763 INFO c.J.w.RequestUtils [main] https://api.weixin.qq.com/cgi-bin/menu/create?access_token=VMg4cPNtVfq5QeRMy-PIZ_a1C8GX2PMBukOctUTZKJvz-hveMjvzVhAJE7apToIvMjAjRNETXCiCsJgUdkcaUDBe8jvyFS31YHfBl2MPhNuVmsXKvbqUSIk9tMi7piQuHADfAHAOHK 
+2017-05-09 21:29:59,945 INFO c.J.w.RequestUtils [main] {"errcode":42001,"errmsg":"access_token expired hint: [CcjyFa0612vr61!]"} 
+2017-05-09 21:29:59,946 INFO c.J.w.RequestUtils [main] getRequest params:access_token=VMg4cPNtVfq5QeRMy-PIZ_a1C8GX2PMBukOctUTZKJvz-hveMjvzVhAJE7apToIvMjAjRNETXCiCsJgUdkcaUDBe8jvyFS31YHfBl2MPhNuVmsXKvbqUSIk9tMi7piQuHADfAHAOHK 
+2017-05-09 21:29:59,946 INFO c.J.w.RequestUtils [main] https://api.weixin.qq.com/cgi-bin/menu/delete?access_token=VMg4cPNtVfq5QeRMy-PIZ_a1C8GX2PMBukOctUTZKJvz-hveMjvzVhAJE7apToIvMjAjRNETXCiCsJgUdkcaUDBe8jvyFS31YHfBl2MPhNuVmsXKvbqUSIk9tMi7piQuHADfAHAOHK 
+2017-05-09 21:29:59,969 INFO c.J.w.RequestUtils [main] {"errcode":42001,"errmsg":"access_token expired hint: [_utlaA0612vr60!]"} 
+2017-05-09 21:29:59,970 INFO c.J.w.RequestUtils [main] getRequest params:str=this+is+a+test+case%21 
+2017-05-09 21:29:59,970 INFO c.J.w.RequestUtils [main] http://127.0.0.1:8081/january/wx/test_success?str=this+is+a+test+case%21 
+2017-05-09 21:30:00,980 INFO c.J.w.RequestUtils [main]  

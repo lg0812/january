@@ -1,21 +1,12 @@
 package com.Jan.controller;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.io.FileUtils;
-import org.apache.http.HttpEntity;
-import org.apache.http.client.fluent.Request;
-import org.apache.http.entity.mime.MultipartEntityBuilder;
-import org.apache.http.util.EntityUtils;
 import org.hibernate.SessionFactory;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,8 +21,6 @@ import com.Jan.constant.ApiConsts;
 import com.Jan.constant.BaseResp;
 import com.Jan.model.UserToken;
 import com.Jan.service.WxService;
-import com.Jan.wx.RequestUtils;
-import com.alibaba.fastjson.JSON;
 
 @Controller
 @Transactional
@@ -56,6 +45,7 @@ public class WxMaterialController {
 
 			UserToken token = (UserToken) sessionFactory.getCurrentSession().createQuery("from UserToken")
 					.uniqueResult();
+			baseResp.setCode(ApiConsts.OK);
 			baseResp.setResult(wxService.wx_upload(token.getAccessToken(), type, save_file(file, req)));
 			baseResp.setCode(ApiConsts.OK);
 		}
@@ -75,6 +65,7 @@ public class WxMaterialController {
 		} else {
 			UserToken token = (UserToken) sessionFactory.getCurrentSession().createQuery("from UserToken")
 					.uniqueResult();
+			baseResp.setCode(ApiConsts.OK);
 			baseResp.setResult(wxService.media_temp(token.getAccessToken(), mediaId));
 			baseResp.setCode(ApiConsts.OK);
 		}
@@ -94,6 +85,7 @@ public class WxMaterialController {
 		} else {
 			UserToken token = (UserToken) sessionFactory.getCurrentSession().createQuery("from UserToken")
 					.uniqueResult();
+			baseResp.setCode(ApiConsts.OK);
 			baseResp.setResult(wxService.wx_upload_long(token.getAccessToken(), type, save_file(file, req)));
 			baseResp.setCode(ApiConsts.OK);
 		}
@@ -113,6 +105,7 @@ public class WxMaterialController {
 		} else {
 			UserToken token = (UserToken) sessionFactory.getCurrentSession().createQuery("from UserToken")
 					.uniqueResult();
+			baseResp.setCode(ApiConsts.OK);
 			baseResp.setResult(wxService.media_long(token.getAccessToken(), mediaId));
 			baseResp.setCode(ApiConsts.OK);
 		}
