@@ -23,6 +23,17 @@ public class User implements Serializable {
 	@Column
 	private String password;
 	@Column
+	private String email;
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	@Column
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date register;
 	@Column(length = 32)
@@ -34,6 +45,11 @@ public class User implements Serializable {
 		this.username = username;
 		this.register = register;
 		this.access_token = access_token;
+	}
+
+	public User() {
+		// TODO Auto-generated constructor stub
+		super();
 	}
 
 	public String getAccess_token() {

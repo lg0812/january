@@ -38,4 +38,37 @@ public class LoginController {
 		}
 		return baseResp;
 	}
+
+	@RequestMapping(value = "/register", method = RequestMethod.POST)
+	@ResponseBody
+	public BaseResp register(String username, String password, String email, String verification) {
+		BaseResp baseResp = new BaseResp();
+		if (StringUtils.isEmpty(username) || StringUtils.isEmpty(password) || StringUtils.isEmpty(email)
+				|| StringUtils.isEmpty(verification)) {
+			baseResp.setCode(ApiConsts.PARAMS_ERROR);
+			baseResp.setResult(null);
+			baseResp.setMessage("one or more args is null");
+		} else {
+			baseResp.setCode(ApiConsts.OK);
+			baseResp.setResult(loginService.register(username, password, email, verification));
+			baseResp.setCode(ApiConsts.OK);
+		}
+		return baseResp;
+	}
+
+	@RequestMapping(value = "/send_email", method = RequestMethod.POST)
+	@ResponseBody
+	public BaseResp send_email(String email) {
+		BaseResp baseResp = new BaseResp();
+		if (StringUtils.isEmpty(email)) {
+			baseResp.setCode(ApiConsts.PARAMS_ERROR);
+			baseResp.setResult(null);
+			baseResp.setMessage("email is null");
+		} else {
+			baseResp.setCode(ApiConsts.OK);
+			baseResp.setResult(loginService.sendMailSave(email));
+			baseResp.setCode(ApiConsts.OK);
+		}
+		return baseResp;
+	}
 }
