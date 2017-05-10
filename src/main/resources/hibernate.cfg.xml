@@ -18,6 +18,7 @@
 		<property name="connection.useUnicode">true</property>
 		<mapping class="model.Person" />
 		<mapping class="model.Phone" />
+		<mapping class="model.User" />
 		<mapping class="model.Product" />
 	</session-factory>
 </hibernate-configuration>

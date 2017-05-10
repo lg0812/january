@@ -10,6 +10,7 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistryBuilder;
 import org.junit.Test;
 
+import com.Jan.model.User;
 import com.alibaba.fastjson.JSON;
 
 import model.Name;
@@ -83,28 +84,30 @@ public class HibernateMappingTest {
 		return s.toString();
 	}
 
-//	@Test
-//	public void test_get_one() {
-//		Session session = this.getSessionFactory().openSession();
-//		Transaction tx = session.beginTransaction();
-//
-//		Person person = (Person) session.createQuery("from Person where id = 1").uniqueResult();
-//		System.out.println(JSON.toJSONString(person.getPhones()));
-//		tx.commit();
-//		session.close();
-//	}
-//
-//	@Test
-//	public void test_get_many() {
-//		Session session = this.getSessionFactory().openSession();
-//		Transaction tx = session.beginTransaction();
-//
-//		Phone phone = (Phone) session.createQuery("from Phone where id = 8").uniqueResult();
-//		System.out.println(JSON.toJSONString(phone));
-//		System.out.println(JSON.toJSONString(phone.getPerson()));
-//		tx.commit();
-//		session.close();
-//	}
+	// @Test
+	// public void test_get_one() {
+	// Session session = this.getSessionFactory().openSession();
+	// Transaction tx = session.beginTransaction();
+	//
+	// Person person = (Person) session.createQuery("from Person where id =
+	// 1").uniqueResult();
+	// System.out.println(JSON.toJSONString(person.getPhones()));
+	// tx.commit();
+	// session.close();
+	// }
+	//
+	// @Test
+	// public void test_get_many() {
+	// Session session = this.getSessionFactory().openSession();
+	// Transaction tx = session.beginTransaction();
+	//
+	// Phone phone = (Phone) session.createQuery("from Phone where id =
+	// 8").uniqueResult();
+	// System.out.println(JSON.toJSONString(phone));
+	// System.out.println(JSON.toJSONString(phone.getPerson()));
+	// tx.commit();
+	// session.close();
+	// }
 
 	@Test
 	public void test_del() {
@@ -131,5 +134,20 @@ public class HibernateMappingTest {
 	@Test
 	public void getEnumValue() {
 		System.out.println(PhoneType.LAND_LINE);
+	}
+
+	@Test
+	public void getUser() {
+		Session session = this.getSessionFactory().openSession();
+		Transaction tx = session.beginTransaction();
+
+		User user = (User) session
+				.createQuery("select new User(id,username,register,access_token) from User where username = '"
+						+ "LG0812" + "' and password = '" + "e10adc3949ba59abbe56e057f20f883e" + "'")
+				.uniqueResult();
+		System.out.println(JSON.toJSON(user));
+
+		tx.commit();
+		session.close();
 	}
 }

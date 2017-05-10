@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.Jan.model.User;
 import com.Jan.service.LoginService;
+
 @Service
 @Transactional
 public class LoginServiceImpl implements LoginService {
@@ -21,7 +22,9 @@ public class LoginServiceImpl implements LoginService {
 	public User login(String username, String password) {
 		// TODO Auto-generated method stub
 		User user = (User) sessionFactory.getCurrentSession()
-				.createQuery("from User where username = '" + username + "' and password = '" + password+"'").uniqueResult();
+				.createQuery("select new User(id,username,register,access_token) from User  where username = '"
+						+ username + "' and password = '" + password + "'")
+				.uniqueResult();
 		return user;
 	}
 

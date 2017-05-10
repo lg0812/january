@@ -99,5 +99,9 @@ function login() {
 		password : "123456"
 	}, function(data) {
 		console.log(data);
-	})
+	},"json")
+}
+
+function show_pass(this_){
+	$(this_).prev().attr("type","text");
 }

@@ -91,7 +91,9 @@
 			</bean>
 		</mvc:message-converters>
 	</mvc:annotation-driven>
-
+	<mvc:cors>
+		<mvc:mapping path="/**" />
+	</mvc:cors>
 
 
 	<!-- xmlns:rabbit="http://www.springframework.org/schema/rabbit" http://www.springframework.org/schema/rabbit 
