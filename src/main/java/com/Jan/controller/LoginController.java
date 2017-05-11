@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.Jan.constant.ApiConsts;
 import com.Jan.constant.BaseResp;
+import com.Jan.model.User;
 import com.Jan.model.UserToken;
 import com.Jan.service.LoginService;
 import com.Jan.service.WxService;
@@ -50,7 +51,6 @@ public class LoginController {
 		} else {
 			baseResp.setCode(ApiConsts.OK);
 			baseResp.setResult(loginService.register(username, password, email, verification));
-			baseResp.setCode(ApiConsts.OK);
 		}
 		return baseResp;
 	}

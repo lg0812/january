@@ -69,7 +69,7 @@ public class LoginServiceImpl implements LoginService {
 	public boolean register(String username, String password, String email, String verification) {
 		// TODO Auto-generated method stub
 		VerificationCode code = (VerificationCode) sessionFactory.getCurrentSession().createQuery(
-				"from VerificationCode where email = '" + email + "' and verification_code = '" + verification + "'")
+				"from VerificationCode where email = '" + email + "' and verification_code = '" + verification.toUpperCase() + "'")
 				.uniqueResult();
 		// 验证码的未过期
 		if (code != null && new Date().getTime() - code.getSend_time().getTime() < Constants.HALF_HOUR) {
@@ -130,7 +130,7 @@ public class LoginServiceImpl implements LoginService {
 		String verification_code = "abcd";
 		if (sendMail(email, verification_code)) {
 			VerificationCode code = (VerificationCode) sessionFactory.getCurrentSession()
-					.createQuery("from VerificationCode where email='" + email + "'");
+					.createQuery("from VerificationCode where email='" + email + "'").uniqueResult();
 			if (code != null) {
 				code.setVerification_code(verification_code);
 				code.setSend_time(new Date());
@@ -138,7 +138,7 @@ public class LoginServiceImpl implements LoginService {
 			} else {
 				code = new VerificationCode();
 				code.setEmail(email);
-				code.setVerification_code(verification_code);
+				code.setVerification_code(verification_code.toUpperCase());
 				code.setSend_time(new Date());
 				sessionFactory.getCurrentSession().save(code);
 			}
