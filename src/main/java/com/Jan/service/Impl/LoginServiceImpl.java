@@ -14,10 +14,13 @@ import javax.mail.internet.MimeMessage;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.hibernate.NonUniqueResultException;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.Jan.constant.ApiConsts;
+import com.Jan.constant.BaseResp;
 import com.Jan.constant.Constants;
 import com.Jan.model.User;
 import com.Jan.model.VerificationCode;
@@ -31,13 +34,35 @@ public class LoginServiceImpl implements LoginService {
 	public SessionFactory sessionFactory;
 
 	@Override
-	public User login(String username, String password) {
+	public User login(String email, String password, BaseResp baseResp) {
 		// TODO Auto-generated method stub
-		User user = (User) sessionFactory.getCurrentSession()
-				.createQuery("select new User(id,username,register,access_token) from User  where username = '"
-						+ username + "' and password = '" + password + "'")
-				.uniqueResult();
-		return user;
+		try {
+			User user = (User) sessionFactory.getCurrentSession()
+					.createQuery(
+							"from User  where email = '" + email + "'")
+					.uniqueResult();
+			if (user == null) {
+				baseResp.setCode(ApiConsts.NOT_EXIST);
+				baseResp.setMessage("email not exist!");
+				return null;
+			} else {
+				if (user.getPassword().equals(password)) {
+					baseResp.setCode(ApiConsts.OK);
+					baseResp.setMessage("login success");
+					return new User(user.getId(),user.getUsername(),user.getEmail(),user.getRegister(),user.getAccess_token());
+				} else {
+					baseResp.setCode(ApiConsts.PW_ERR);
+					baseResp.setMessage("password error!");
+					return null;
+				}
+			}
+		} catch (NonUniqueResultException e) {
+			// TODO: handle exception
+			baseResp.setCode(ApiConsts.ERROR);
+			baseResp.setMessage("server error!");
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	@Override
@@ -46,7 +71,7 @@ public class LoginServiceImpl implements LoginService {
 		VerificationCode code = (VerificationCode) sessionFactory.getCurrentSession().createQuery(
 				"from VerificationCode where email = '" + email + "' and verification_code = '" + verification + "'")
 				.uniqueResult();
-		// ÑéÖ¤ÂëµÄÎ´¹ýÆÚ
+		// ï¿½ï¿½Ö¤ï¿½ï¿½ï¿½Î´ï¿½ï¿½ï¿½ï¿½
 		if (code != null && new Date().getTime() - code.getSend_time().getTime() < Constants.HALF_HOUR) {
 			User user = new User();
 			user.setUsername(username);
@@ -62,28 +87,28 @@ public class LoginServiceImpl implements LoginService {
 
 	public boolean sendMail(String email, String code) {
 
-		// °¢ÀïÔÆÓÊÏä¹ØÓÚsmtpµÄÐÅÏ¢Á´½Ó£ºhttp://mailhelp.mxhichina.com/smartmail/detail.vm?spm=0.0.0.0.6TWdiq&knoId=5871700
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½smtpï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½Ó£ï¿½http://mailhelp.mxhichina.com/smartmail/detail.vm?spm=0.0.0.0.6TWdiq&knoId=5871700
 		// TODO Auto-generated method stub
 		Properties props = new Properties();
-		// ÉèÖÃÓÊ¼þ·þÎñÆ÷Ö÷»úÃû
+		// ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		props.setProperty("mail.host", "smtp.mxhichina.com");
-		// ·¢ËÍ·þÎñÆ÷ÐèÒªÉí·ÝÑéÖ¤
+		// ï¿½ï¿½ï¿½Í·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½Ö¤
 		props.setProperty("mail.smtp.auth", "true");
-		// ÉèÖÃÓÊ¼þÐ­ÒéÃû³Æ
+		// ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½Ð­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		props.setProperty("mail.transport.protocol", "smtp");
-		// ÉèÖÃÓÊ¼þ·¢ËÍ¶Ë¿ÚºÅ
+		// ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½Í¶Ë¿Úºï¿½
 		props.setProperty("mail.stmp.port", "465");
-		// ÉèÖÃ·¢ËÍÈËÕËºÅ
+		// ï¿½ï¿½ï¿½Ã·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ëºï¿½
 		// props.getProperty("mail.smtp.from", Constants.EMAIL);
-		// ÉèÖÃ³¬Ê±Ê±¼ä
+		// ï¿½ï¿½ï¿½Ã³ï¿½Ê±Ê±ï¿½ï¿½
 		props.getProperty("mail.stmp.timeout", "30000");
 		try {
 			Session session = Session.getInstance(props);
 			Message msg = new MimeMessage(session);
-			msg.setSubject("May ÍøÕ¾×¢²áÂë");
-			// ÉèÖÃÓÊ¼þÄÚÈÝ
-			msg.setText("»¶Ó­×¢²á±¾ÍøÕ¾ÕËºÅ£¬ÄúµÄÑéÖ¤ÂëÊÇ£º" + code.toUpperCase());
-			// ÉèÖÃ·¢¼þÈË
+			msg.setSubject("May ï¿½ï¿½Õ¾×¢ï¿½ï¿½ï¿½ï¿½");
+			// ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½
+			msg.setText("ï¿½ï¿½Ó­×¢ï¿½á±¾ï¿½ï¿½Õ¾ï¿½ËºÅ£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¤ï¿½ï¿½ï¿½Ç£ï¿½" + code.toUpperCase());
+			// ï¿½ï¿½ï¿½Ã·ï¿½ï¿½ï¿½ï¿½ï¿½
 			msg.setFrom(new InternetAddress(Constants.EMAIL));
 
 			Transport tp = session.getTransport();

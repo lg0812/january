@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
 encoding//src/main/java/com/Jan/controller/WeixinController.java=UTF-8
+encoding//src/main/java/com/Jan/service/Impl/LoginServiceImpl.java=UTF-8
 encoding//src/main/java/com/Jan/wx/req/WechatRequest.java=UTF-8
 separateDerivedEncodings=true

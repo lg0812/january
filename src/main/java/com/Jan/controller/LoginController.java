@@ -25,15 +25,14 @@ public class LoginController {
 
 	@RequestMapping(value = "/login_in", method = RequestMethod.POST)
 	@ResponseBody
-	public BaseResp login_in(String username, String password) {
+	public BaseResp login_in(String email, String password) {
 		BaseResp baseResp = new BaseResp();
-		if (StringUtils.isEmpty(username) || StringUtils.isEmpty(password)) {
+		if (StringUtils.isEmpty(email) || StringUtils.isEmpty(password)) {
 			baseResp.setCode(ApiConsts.PARAMS_ERROR);
 			baseResp.setResult(null);
-			baseResp.setMessage("username or password is null");
+			baseResp.setMessage("email or password is null");
 		} else {
-			baseResp.setCode(ApiConsts.OK);
-			baseResp.setResult(loginService.login(username, password));
+			baseResp.setResult(loginService.login(email, password, baseResp));
 			baseResp.setCode(ApiConsts.OK);
 		}
 		return baseResp;

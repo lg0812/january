@@ -47,6 +47,15 @@ public class User implements Serializable {
 		this.access_token = access_token;
 	}
 
+	public User(int id, String username, String email, Date register, String access_token) {
+		super();
+		this.id = id;
+		this.username = username;
+		this.email = email;
+		this.register = register;
+		this.access_token = access_token;
+	}
+
 	public User() {
 		// TODO Auto-generated constructor stub
 		super();
