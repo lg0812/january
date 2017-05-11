@@ -71,7 +71,7 @@ public class LoginServiceImpl implements LoginService {
 		VerificationCode code = (VerificationCode) sessionFactory.getCurrentSession().createQuery(
 				"from VerificationCode where email = '" + email + "' and verification_code = '" + verification + "'")
 				.uniqueResult();
-		// ��֤���δ����
+		// 验证码的未过期
 		if (code != null && new Date().getTime() - code.getSend_time().getTime() < Constants.HALF_HOUR) {
 			User user = new User();
 			user.setUsername(username);
@@ -87,28 +87,28 @@ public class LoginServiceImpl implements LoginService {
 
 	public boolean sendMail(String email, String code) {
 
-		// �������������smtp����Ϣ���ӣ�http://mailhelp.mxhichina.com/smartmail/detail.vm?spm=0.0.0.0.6TWdiq&knoId=5871700
+		// 阿里云邮箱关于smtp的信息链接：http://mailhelp.mxhichina.com/smartmail/detail.vm?spm=0.0.0.0.6TWdiq&knoId=5871700
 		// TODO Auto-generated method stub
 		Properties props = new Properties();
-		// �����ʼ�������������
+		// 设置邮件服务器主机名
 		props.setProperty("mail.host", "smtp.mxhichina.com");
-		// ���ͷ�������Ҫ�����֤
+		// 发送服务器需要身份验证
 		props.setProperty("mail.smtp.auth", "true");
-		// �����ʼ�Э������
+		// 设置邮件协议名称
 		props.setProperty("mail.transport.protocol", "smtp");
-		// �����ʼ����Ͷ˿ں�
+		// 设置邮件发送端口号
 		props.setProperty("mail.stmp.port", "465");
-		// ���÷������˺�
+		// 设置发送人账号
 		// props.getProperty("mail.smtp.from", Constants.EMAIL);
-		// ���ó�ʱʱ��
+		// 设置超时时间
 		props.getProperty("mail.stmp.timeout", "30000");
 		try {
 			Session session = Session.getInstance(props);
 			Message msg = new MimeMessage(session);
-			msg.setSubject("May ��վע����");
-			// �����ʼ�����
-			msg.setText("��ӭע�᱾��վ�˺ţ�������֤���ǣ�" + code.toUpperCase());
-			// ���÷�����
+			msg.setSubject("May 网站注册码");
+			// 设置邮件内容
+			msg.setText("欢迎注册本网站账号，您的验证码是：" + code.toUpperCase());
+			// 设置发件人
 			msg.setFrom(new InternetAddress(Constants.EMAIL));
 
 			Transport tp = session.getTransport();
