@@ -2,6 +2,7 @@ package com.Jan.service.Impl;
 
 import java.util.Date;
 import java.util.Properties;
+import java.util.Random;
 
 import javax.annotation.Resource;
 import javax.mail.Address;
@@ -16,6 +17,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.NonUniqueResultException;
 import org.hibernate.SessionFactory;
+import org.junit.Test;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -38,9 +40,7 @@ public class LoginServiceImpl implements LoginService {
 		// TODO Auto-generated method stub
 		try {
 			User user = (User) sessionFactory.getCurrentSession()
-					.createQuery(
-							"from User  where email = '" + email + "'")
-					.uniqueResult();
+					.createQuery("from User  where email = '" + email + "'").uniqueResult();
 			if (user == null) {
 				baseResp.setCode(ApiConsts.NOT_EXIST);
 				baseResp.setMessage("email not exist!");
@@ -49,7 +49,8 @@ public class LoginServiceImpl implements LoginService {
 				if (user.getPassword().equals(password)) {
 					baseResp.setCode(ApiConsts.OK);
 					baseResp.setMessage("login success");
-					return new User(user.getId(),user.getUsername(),user.getEmail(),user.getRegister(),user.getAccess_token());
+					return new User(user.getId(), user.getUsername(), user.getEmail(), user.getRegister(),
+							user.getAccess_token());
 				} else {
 					baseResp.setCode(ApiConsts.PW_ERR);
 					baseResp.setMessage("password error!");
@@ -66,27 +67,42 @@ public class LoginServiceImpl implements LoginService {
 	}
 
 	@Override
-	public boolean register(String username, String password, String email, String verification) {
+	public boolean register(String username, String password, String email, String verification, BaseResp baseResp) {
 		// TODO Auto-generated method stub
-		VerificationCode code = (VerificationCode) sessionFactory.getCurrentSession().createQuery(
-				"from VerificationCode where email = '" + email + "' and verification_code = '" + verification.toUpperCase() + "'")
+		VerificationCode code = (VerificationCode) sessionFactory.getCurrentSession()
+				.createQuery("from VerificationCode where email = '" + email + "' and verification_code = '"
+						+ verification.toUpperCase() + "'")
 				.uniqueResult();
 		// 验证码的未过期
 		if (code != null && new Date().getTime() - code.getSend_time().getTime() < Constants.HALF_HOUR) {
+			code.setEmail(null);
+			User u = (User) sessionFactory.getCurrentSession().createQuery("from User where email = '" + email + "'")
+					.uniqueResult();
+			if (u != null) {
+				baseResp.setCode(ApiConsts.ALREADY_EXIST);
+				baseResp.setMessage("This email has been registered");
+				return false;
+			}
 			User user = new User();
 			user.setUsername(username);
 			user.setPassword(password);
 			user.setEmail(email);
 			user.setRegister(new Date());
 			sessionFactory.getCurrentSession().save(user);
+			baseResp.setCode(ApiConsts.OK);
+			baseResp.setMessage("register success");
+			baseResp.setResult(new User(user.getId(), user.getUsername(), user.getEmail(), user.getRegister(),
+					user.getAccess_token()));
 			return true;
 		} else {
+			baseResp.setCode(ApiConsts.VERIFICATION);
+			baseResp.setMessage("invalid verification code");
 			return false;
 		}
 	}
 
 	public boolean sendMail(String email, String code) {
-
+		System.out.println(code);
 		// 阿里云邮箱关于smtp的信息链接：http://mailhelp.mxhichina.com/smartmail/detail.vm?spm=0.0.0.0.6TWdiq&knoId=5871700
 		// TODO Auto-generated method stub
 		Properties props = new Properties();
@@ -127,14 +143,14 @@ public class LoginServiceImpl implements LoginService {
 	@Override
 	public boolean sendMailSave(String email) {
 		// TODO Auto-generated method stub
-		String verification_code = "abcd";
+		String verification_code = getRandomString(4);
 		if (sendMail(email, verification_code)) {
 			VerificationCode code = (VerificationCode) sessionFactory.getCurrentSession()
 					.createQuery("from VerificationCode where email='" + email + "'").uniqueResult();
 			if (code != null) {
 				code.setVerification_code(verification_code);
 				code.setSend_time(new Date());
-				sessionFactory.getCurrentSession().update(code);
+//				sessionFactory.getCurrentSession().update(code);
 			} else {
 				code = new VerificationCode();
 				code.setEmail(email);
@@ -147,9 +163,56 @@ public class LoginServiceImpl implements LoginService {
 		return false;
 	}
 
-	// @Test
-	// public void send() {
-	// System.out.println(sendMail("2356581512@qq.com"));
-	// }
+	@Test
+	public void send() {
+		System.out.println(sendMail("2356581512@qq.com",getRandomString(4).toUpperCase()));
+	}
 
+	public String getRandomString(int length) { // length表示生成字符串的长度
+		String base = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_";
+		Random random = new Random();
+		StringBuffer sb = new StringBuffer();
+		for (int i = 0; i < length; i++) {
+			int number = random.nextInt(base.length());
+			sb.append(base.charAt(number));
+		}
+		return sb.toString();
+	}
+
+	@Override
+	public boolean resetPW(String password, String email, String verification, BaseResp baseResp) {
+		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub
+		VerificationCode code = (VerificationCode) sessionFactory.getCurrentSession()
+				.createQuery("from VerificationCode where email = '" + email + "' and verification_code = '"
+						+ verification.toUpperCase() + "'")
+				.uniqueResult();
+		// 验证码的未过期
+		if (code != null && new Date().getTime() - code.getSend_time().getTime() < Constants.HALF_HOUR) {
+			code.setEmail(null);
+			User u = (User) sessionFactory.getCurrentSession().createQuery("from User where email = '" + email + "'")
+					.uniqueResult();
+			if (u != null) {
+				baseResp.setCode(ApiConsts.OK);
+				baseResp.setMessage("reset success");
+				u.setPassword(password);
+				baseResp.setResult(
+						new User(u.getId(), u.getUsername(), u.getEmail(), u.getRegister(), u.getAccess_token()));
+				return true;
+			} else {
+				baseResp.setCode(ApiConsts.NOT_EXIST);
+				baseResp.setMessage("该用户不存在");
+				return false;
+			}
+
+		} else {
+			baseResp.setCode(ApiConsts.VERIFICATION);
+			baseResp.setMessage("invalid verification code");
+			return false;
+		}
+	}
+
+//	public void rrr() {
+//		return;
+//	}
 }

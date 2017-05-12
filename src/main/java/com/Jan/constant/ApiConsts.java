@@ -12,4 +12,6 @@ public class ApiConsts {
 	public static final String PW_ERR = "1006";
 	// 注册时用户名已存在
 	public static final String ALREADY_EXIST = "1007";
+	// 验证码过期
+	public static final String VERIFICATION = "1008";
 }

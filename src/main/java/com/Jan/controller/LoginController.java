@@ -34,7 +34,6 @@ public class LoginController {
 			baseResp.setMessage("email or password is null");
 		} else {
 			baseResp.setResult(loginService.login(email, password, baseResp));
-			baseResp.setCode(ApiConsts.OK);
 		}
 		return baseResp;
 	}
@@ -49,8 +48,23 @@ public class LoginController {
 			baseResp.setResult(null);
 			baseResp.setMessage("one or more args is null");
 		} else {
-			baseResp.setCode(ApiConsts.OK);
-			baseResp.setResult(loginService.register(username, password, email, verification));
+			if (!loginService.register(username, password, email, verification, baseResp))
+				baseResp.setResult(false);
+		}
+		return baseResp;
+	}
+
+	@RequestMapping(value = "/reset_pw", method = RequestMethod.POST)
+	@ResponseBody
+	public BaseResp reset_pw(String password, String email, String verification) {
+		BaseResp baseResp = new BaseResp();
+		if (StringUtils.isEmpty(password) || StringUtils.isEmpty(email) || StringUtils.isEmpty(verification)) {
+			baseResp.setCode(ApiConsts.PARAMS_ERROR);
+			baseResp.setResult(null);
+			baseResp.setMessage("one or more args is null");
+		} else {
+			if (!loginService.resetPW(password, email, verification, baseResp))
+				baseResp.setResult(false);
 		}
 		return baseResp;
 	}
