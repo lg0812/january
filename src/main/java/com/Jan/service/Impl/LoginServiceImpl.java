@@ -3,6 +3,7 @@ package com.Jan.service.Impl;
 import java.util.Date;
 import java.util.Properties;
 import java.util.Random;
+import java.util.UUID;
 
 import javax.annotation.Resource;
 import javax.mail.Address;
@@ -47,6 +48,7 @@ public class LoginServiceImpl implements LoginService {
 				return null;
 			} else {
 				if (user.getPassword().equals(password)) {
+					user.setAccess_token(UUID.randomUUID().toString());
 					baseResp.setCode(ApiConsts.OK);
 					baseResp.setMessage("login success");
 					return new User(user.getId(), user.getUsername(), user.getEmail(), user.getRegister(),
@@ -75,7 +77,7 @@ public class LoginServiceImpl implements LoginService {
 				.uniqueResult();
 		// 验证码的未过期
 		if (code != null && new Date().getTime() - code.getSend_time().getTime() < Constants.HALF_HOUR) {
-			code.setEmail(null);
+
 			User u = (User) sessionFactory.getCurrentSession().createQuery("from User where email = '" + email + "'")
 					.uniqueResult();
 			if (u != null) {
@@ -83,6 +85,7 @@ public class LoginServiceImpl implements LoginService {
 				baseResp.setMessage("This email has been registered");
 				return false;
 			}
+			code.setVerification_code(null);
 			User user = new User();
 			user.setUsername(username);
 			user.setPassword(password);
@@ -96,7 +99,7 @@ public class LoginServiceImpl implements LoginService {
 			return true;
 		} else {
 			baseResp.setCode(ApiConsts.VERIFICATION);
-			baseResp.setMessage("invalid verification code");
+			baseResp.setMessage("invalid email or verification code");
 			return false;
 		}
 	}
@@ -150,7 +153,7 @@ public class LoginServiceImpl implements LoginService {
 			if (code != null) {
 				code.setVerification_code(verification_code);
 				code.setSend_time(new Date());
-//				sessionFactory.getCurrentSession().update(code);
+				// sessionFactory.getCurrentSession().update(code);
 			} else {
 				code = new VerificationCode();
 				code.setEmail(email);
@@ -165,7 +168,7 @@ public class LoginServiceImpl implements LoginService {
 
 	@Test
 	public void send() {
-		System.out.println(sendMail("2356581512@qq.com",getRandomString(4).toUpperCase()));
+		System.out.println(sendMail("2356581512@qq.com", getRandomString(4).toUpperCase()));
 	}
 
 	public String getRandomString(int length) { // length表示生成字符串的长度
@@ -189,7 +192,7 @@ public class LoginServiceImpl implements LoginService {
 				.uniqueResult();
 		// 验证码的未过期
 		if (code != null && new Date().getTime() - code.getSend_time().getTime() < Constants.HALF_HOUR) {
-			code.setEmail(null);
+
 			User u = (User) sessionFactory.getCurrentSession().createQuery("from User where email = '" + email + "'")
 					.uniqueResult();
 			if (u != null) {
@@ -198,6 +201,7 @@ public class LoginServiceImpl implements LoginService {
 				u.setPassword(password);
 				baseResp.setResult(
 						new User(u.getId(), u.getUsername(), u.getEmail(), u.getRegister(), u.getAccess_token()));
+				code.setVerification_code(null);
 				return true;
 			} else {
 				baseResp.setCode(ApiConsts.NOT_EXIST);
@@ -212,7 +216,8 @@ public class LoginServiceImpl implements LoginService {
 		}
 	}
 
-//	public void rrr() {
-//		return;
-//	}
+	// @Test
+	// public void rrr() {
+	// System.out.println(UUID.randomUUID().toString());
+	// }
 }
