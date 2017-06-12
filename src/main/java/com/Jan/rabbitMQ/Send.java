@@ -1,4 +1,4 @@
-package com.Jan.utils;
+package com.Jan.rabbitMQ;
 
 public class Send {
 /*
