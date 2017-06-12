@@ -33,6 +33,13 @@ public class User implements Serializable {
 		this.email = email;
 	}
 
+	public User(String username, String password, String email) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.email = email;
+	}
+
 	@Column
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date register;
