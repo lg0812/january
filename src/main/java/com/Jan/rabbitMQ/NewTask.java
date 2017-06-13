@@ -1,8 +1,13 @@
 package com.Jan.rabbitMQ;
 
+import com.rabbitmq.client.Channel;
+import com.rabbitmq.client.Connection;
+import com.rabbitmq.client.ConnectionFactory;
+import com.rabbitmq.client.MessageProperties;
+
 public class NewTask {
 
-	/*private static final String TASK_QUEUE_NAME = "task_queue";
+	private static final String TASK_QUEUE_NAME = "task_queue";
 
 	public static void main(String[] argv) throws Exception {
 		ConnectionFactory factory = new ConnectionFactory();
@@ -11,7 +16,7 @@ public class NewTask {
 		Channel channel = connection.createChannel();
 
 		channel.queueDeclare(TASK_QUEUE_NAME, true, false, false, null);
-		String[] a = {"first.","second..","third..."};
+		String[] a = { "first.", "second..", "third..." };
 		String message = getMessage(a);
 
 		channel.basicPublish("", TASK_QUEUE_NAME, MessageProperties.PERSISTENT_TEXT_PLAIN, message.getBytes("UTF-8"));
@@ -36,5 +41,5 @@ public class NewTask {
 			words.append(delimiter).append(strings[i]);
 		}
 		return words.toString();
-	}*/
+	}
 }
