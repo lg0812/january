@@ -22,9 +22,8 @@
 		http://www.springframework.org/schema/util
 		http://www.springframework.org/schema/util/spring-util-4.3.xsd">
 
-	<context:property-placeholder location="classpath:spring-config.properties" />
 	<rabbit:connection-factory id="connectionFactory"
-		host="${rabbit_host}" port="5672" username="LG0812" password="123456" />
+		host="${rabbit_host}" port="5672" password="${jedis_pass}" />
 	<rabbit:template id="amqpTemplate" connection-factory="connectionFactory"
 		exchange="myExchange" routing-key="foo.bar" />
 	<rabbit:admin connection-factory="connectionFactory" />

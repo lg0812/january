@@ -1,5 +1,7 @@
 package com.Jan.hibernate;
 
+import javax.annotation.Resource;
+
 import org.hibernate.SessionFactory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,18 +15,15 @@ import org.springframework.transaction.annotation.Transactional;
 @RunWith(SpringRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(locations = "classpath:spring-mysql.xml")
-@Transactional(transactionManager="transactionManager")
+@Transactional
 @Commit
 public class HibernateDoc {
-	@Autowired
+	@Resource(name = "sessionFactory")
 	private SessionFactory sessionFactory;
 
 	@Test
 	public void test1() {
 		System.out.println(sessionFactory);
-		// UserToken ut = (UserToken)
-		// sessionFactory.getCurrentSession().createQuery("from
-		// UserToken").list();
-		// System.out.println(JSON.toJSONString(ut));
+		sessionFactory.getCurrentSession().createQuery("from Product").list();
 	}
 }

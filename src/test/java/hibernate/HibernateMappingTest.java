@@ -4,10 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistryBuilder;
 import org.junit.Test;
 
 import com.Jan.model.User;
@@ -23,16 +20,10 @@ import model.Product;
  * Created by hsx on 2017/3/31.
  */
 public class HibernateMappingTest {
-	private static SessionFactory getSessionFactory() {
-		Configuration conf = new Configuration().configure();
-		return conf.buildSessionFactory(
-				new ServiceRegistryBuilder().applySettings(conf.getProperties()).buildServiceRegistry());
-	}
-
 	@Test
 	public void main() {
 
-		Session session = this.getSessionFactory().openSession();
+		Session session = HibernateUtils.getSessionFactory().openSession();
 		Transaction tx = session.beginTransaction();
 		session.createQuery("delete from Phone").executeUpdate();
 		session.createQuery("delete from Person").executeUpdate();
@@ -111,7 +102,7 @@ public class HibernateMappingTest {
 
 	@Test
 	public void test_del() {
-		Session session = this.getSessionFactory().openSession();
+		Session session = HibernateUtils.getSessionFactory().openSession();
 		Transaction tx = session.beginTransaction();
 
 		session.createQuery("delete from Phone where id = 23").executeUpdate();
@@ -122,7 +113,7 @@ public class HibernateMappingTest {
 
 	@Test
 	public void test_del_() {
-		Session session = this.getSessionFactory().openSession();
+		Session session = HibernateUtils.getSessionFactory().openSession();
 		Transaction tx = session.beginTransaction();
 
 		session.createQuery("delete from Person where id = 7").executeUpdate();
@@ -138,7 +129,7 @@ public class HibernateMappingTest {
 
 	@Test
 	public void getUser() {
-		Session session = this.getSessionFactory().openSession();
+		Session session = HibernateUtils.getSessionFactory().openSession();
 		Transaction tx = session.beginTransaction();
 
 		User user = (User) session
