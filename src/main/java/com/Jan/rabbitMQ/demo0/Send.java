@@ -7,14 +7,14 @@ import com.rabbitmq.client.ConnectionFactory;
 public class Send {
 
 	private final static String QUEUE_NAME = "hello";
-	private final static String host = "192.168.0.104";
+	private final static String host = "106.14.136.160";
 
 	public static void main(String[] argv) throws Exception {
 		// 通过工厂创建一个到服务器的连接
 		ConnectionFactory factory = new ConnectionFactory();
 		factory.setHost(host);
 		factory.setUsername("LG0812");
-		factory.setPassword("123456");
+		factory.setPassword("aliyun_yltfy");
 		Connection connection = factory.newConnection();
 		// 创建一个通道
 		Channel channel = connection.createChannel();

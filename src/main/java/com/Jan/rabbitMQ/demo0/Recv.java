@@ -19,7 +19,7 @@ public class Recv {
 		ConnectionFactory factory = new ConnectionFactory();
 		factory.setHost(host);
 		factory.setUsername("LG0812");
-		factory.setPassword("123456");
+		factory.setPassword("aliyun_yltfy");
 		Connection connection = factory.newConnection();
 		Channel channel = connection.createChannel();
 		// 在此，也声明一个队列，因为我们可能在发布消息之之前启动消费者，确保队列存在

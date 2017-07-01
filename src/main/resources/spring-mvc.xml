@@ -47,7 +47,7 @@
 
 	<task:annotation-driven />
 	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
-	<tx:annotation-driven transaction-manager="transactionManager" />
+	
 	<mvc:annotation-driven>
 		<mvc:message-converters register-defaults="true">
 			<!-- 配置Fastjson支持 -->

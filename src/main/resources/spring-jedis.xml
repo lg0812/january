@@ -29,7 +29,8 @@
 	</bean>
 	<bean id="jedisConnFactory"
 		class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
-		p:use-pool="true" p:host-name="${jedis_host}" p:port="6379" />
+		p:use-pool="true" p:host-name="${jedis_host}" p:port="6379"
+		p:password="${jedis_pass}" />
 	<!-- redis template definition -->
 
 	<bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate"
