@@ -25,7 +25,7 @@ import com.alibaba.fastjson.JSON;
 
 @RunWith(SpringRunner.class)
 @WebAppConfiguration
-@ContextConfiguration(locations = "classpath:spring-jedis.xml")
+@ContextConfiguration(locations = "classpath:spring-jedis-dev.xml")
 public class Example {
 
 	/*

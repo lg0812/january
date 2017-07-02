@@ -5,7 +5,6 @@ import javax.annotation.Resource;
 import org.hibernate.SessionFactory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Commit;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -14,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @RunWith(SpringRunner.class)
 @WebAppConfiguration
-@ContextConfiguration(locations = "classpath:spring-mysql.xml")
+@ContextConfiguration(locations = "classpath:spring-mysql-dev.xml")
 @Transactional
 @Commit
 public class HibernateDoc {
@@ -24,6 +23,6 @@ public class HibernateDoc {
 	@Test
 	public void test1() {
 		System.out.println(sessionFactory);
-		sessionFactory.getCurrentSession().createQuery("from Product").list();
+		sessionFactory.getCurrentSession().createQuery("from UserToken").list();
 	}
 }
