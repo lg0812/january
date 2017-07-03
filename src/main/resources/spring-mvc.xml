@@ -20,7 +20,9 @@
 		http://www.springframework.org/schema/util/spring-util-4.3.xsd">
 
 	<context:component-scan base-package="com.Jan"></context:component-scan>
-	<import resource="spring-*.xml" />
+	<import resource="spring-mysql.xml" />
+	<import resource="spring-jedis.xml" />
+	<!-- <import resource="spring-rabbitmq.xml" /> -->
 	<bean
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="locations">
