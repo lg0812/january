@@ -44,14 +44,14 @@
 		</listener> -->
 	<error-page>
 		<error-code>404</error-code>
-		<location>/WEB-INF/pages/404.html</location>
+		<location>/error_pages/404.html</location>
 	</error-page>
 	<error-page>
 		<error-code>400</error-code>
-		<location>/WEB-INF/pages/404.html</location>
+		<location>/error_pages/404.html</location>
 	</error-page>
 	<error-page>
 		<error-code>500</error-code>
-		<location>/WEB-INF/pages/404.html</location>
+		<location>/error_pages/404.html</location>
 	</error-page>
 </web-app>
