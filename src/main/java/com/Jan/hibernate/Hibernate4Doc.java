@@ -13,10 +13,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 @RunWith(SpringRunner.class)
 @WebAppConfiguration
-@ContextConfiguration(locations = "classpath:spring-mysql-dev.xml")
+@ContextConfiguration(locations = "classpath:spring-mysql-hibernate4.xml")
 @Transactional
 @Commit
-public class HibernateDoc {
+public class Hibernate4Doc {
 	@Resource(name = "sessionFactory")
 	private SessionFactory sessionFactory;
 
