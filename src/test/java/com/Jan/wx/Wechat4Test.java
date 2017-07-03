@@ -8,12 +8,13 @@ import org.junit.Test;
 public class Wechat4Test {
 	public static String accessToken = "VMg4cPNtVfq5QeRMy-PIZ_a1C8GX2PMBukOctUTZKJvz-hveMjvzVhAJE7apToIvMjAjRNETXCiCsJgUdkcaUDBe8jvyFS31YHfBl2MPhNuVmsXKvbqUSIk9tMi7piQuHADfAHAOHK";
 
-	@Test
-	public void testGetReq() {
-		Map map = new HashMap<String, String>();
-		map.put("str", "this is a test case!");
-		RequestUtils.getRequest("http://127.0.0.1:8081/january/wx/test_success", map);
-	}
+	// @Test
+	// public void testGetReq() {
+	// Map map = new HashMap<String, String>();
+	// map.put("str", "this is a test case!");
+	// RequestUtils.getRequest("http://127.0.0.1:8081/january/wx/test_success",
+	// map);
+	// }
 
 	// 创建菜单
 	@Test
