@@ -7,6 +7,24 @@
 	position: relative;
 }
 
+.focus-module {
+	color: #000000;
+	flex-grow: 1;
+	height: 150px;
+	background-color: #ffffff;
+	margin: 10px;
+}
+
+.focus-module:hover {
+	box-shadow: 0px 0px 20px 4px #e85347;
+}
+
+.focus-module>img {
+	height: 90px;
+	width: 90px;
+	position: relative;
+}
+
 .hasCover {
 	color: #FFFFFF;
 	background-color: rgba(0, 0, 0, 0.3);
@@ -54,6 +72,10 @@
 }
 
 .my-slider-third {
+	background-image: url("../images/pic1.jpg");
+}
+
+.my-slider-fourth {
 	background-image: url("../images/pic1.jpg");
 }
 
