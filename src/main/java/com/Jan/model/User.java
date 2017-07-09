@@ -43,7 +43,7 @@ public class User implements Serializable {
 	@Column
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date register;
-	@Column(length = 32)
+	@Column
 	private String access_token;
 
 	public User(int id, String username, Date register, String access_token) {
