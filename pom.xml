@@ -12,6 +12,29 @@
 		<jdk>1.8</jdk> </activation> <properties> <maven.compiler.source>1.8</maven.compiler.source> 
 		<maven.compiler.target>1.8</maven.compiler.target> <maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion> 
 		</properties> </profile> </profiles> -->
+
+
+	<profiles>
+		<profile>
+			<id>ubuntu</id>
+			<activation>
+				<os>
+					<family>Ubuntu</family>
+				</os>
+			</activation>
+		</profile>
+
+		<profile>
+			<id>Windows</id>
+			<activation>
+				<os>
+					<family>Windows</family>
+				</os>
+			</activation>
+		</profile>
+	</profiles>
+
+
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
