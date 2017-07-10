@@ -19,7 +19,7 @@
 			<id>ubuntu</id>
 			<activation>
 				<os>
-					<family>Ubuntu</family>
+					<family>Linux</family>
 				</os>
 			</activation>
 		</profile>
