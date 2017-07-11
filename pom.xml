@@ -22,15 +22,21 @@
 					<family>Linux</family>
 				</os>
 			</activation>
+			<properties>
+				<env>ubuntu</env>
+			</properties>
 		</profile>
 
 		<profile>
-			<id>Windows</id>
+			<id>windows</id>
 			<activation>
 				<os>
 					<family>Windows</family>
 				</os>
 			</activation>
+			<properties>
+				<env>windows</env>
+			</properties>
 		</profile>
 	</profiles>
 
@@ -109,18 +115,6 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-beans</artifactId>
-			<version>4.3.7.RELEASE</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context</artifactId>
-			<version>4.3.7.RELEASE</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context-support</artifactId>
 			<version>4.3.7.RELEASE</version>
 		</dependency>
 
@@ -288,6 +282,15 @@
 	</dependencies>
 	<build>
 		<finalName>january</finalName>
+		<filters>
+			<filter>my/spring-${env}-config.properties</filter>
+		</filters>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
