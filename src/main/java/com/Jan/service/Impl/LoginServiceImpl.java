@@ -114,7 +114,7 @@ public class LoginServiceImpl implements LoginService {
 		// 发送服务器需要身份验证
 		props.setProperty("mail.smtp.auth", "true");
 		// 设置邮件协议名称
-		props.setProperty("mail.transport.protocol", "SMTP");
+		props.setProperty("mail.transport.protocol", "smtp");
 		// 设置邮件发送端口号
 		props.setProperty("mail.stmp.port", "465");
 		// 设置发送人账号
