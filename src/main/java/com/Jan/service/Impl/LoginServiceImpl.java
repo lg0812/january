@@ -109,6 +109,7 @@ public class LoginServiceImpl implements LoginService {
 		// 阿里云邮箱关于smtp的信息链接：http://mailhelp.mxhichina.com/smartmail/detail.vm?spm=0.0.0.0.6TWdiq&knoId=5871700
 		// TODO Auto-generated method stub
 		Properties props = new Properties();
+		props.setProperty("mail.debug", "true");
 		// 设置邮件服务器主机名
 		props.setProperty("mail.host", "smtp.mxhichina.com");
 		// 发送服务器需要身份验证
