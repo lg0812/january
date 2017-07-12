@@ -1,4 +1,6 @@
 /target/
-/.idea
-/.setting
+
+/.idea/
+
+/.setting/
 app.log
