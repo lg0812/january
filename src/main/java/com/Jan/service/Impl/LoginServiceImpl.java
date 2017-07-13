@@ -7,6 +7,7 @@ import java.util.UUID;
 
 import javax.annotation.Resource;
 import javax.mail.Address;
+import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
@@ -111,7 +112,7 @@ public class LoginServiceImpl implements LoginService {
 		Properties props = new Properties();
 		props.setProperty("mail.debug", "true");
 		// 设置邮件服务器主机名
-		props.setProperty("mail.host", "smtp.mxhichina.com");
+		props.setProperty("mail.stmp.host", "smtp.mxhichina.com");
 		// 发送服务器需要身份验证
 		props.setProperty("mail.smtp.auth", "true");
 		// 设置邮件协议名称
@@ -221,4 +222,5 @@ public class LoginServiceImpl implements LoginService {
 	// public void rrr() {
 	// System.out.println(UUID.randomUUID().toString());
 	// }
+
 }
