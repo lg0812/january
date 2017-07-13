@@ -112,12 +112,14 @@ public class LoginServiceImpl implements LoginService {
 		Properties props = new Properties();
 		props.setProperty("mail.debug", "true");
 		// 设置邮件服务器主机名
-		props.setProperty("mail.stmp.host", "smtp.mxhichina.com");
+		// props.setProperty("mail.host", "smtp.163.com");
+		props.setProperty("mail.host", "smtp.mxhichina.com");
 		// 发送服务器需要身份验证
 		props.setProperty("mail.smtp.auth", "true");
 		// 设置邮件协议名称
 		props.setProperty("mail.transport.protocol", "smtp");
 		// 设置邮件发送端口号
+		// props.setProperty("mail.stmp.port", "25");
 		props.setProperty("mail.stmp.port", "465");
 		// 设置发送人账号
 		// props.getProperty("mail.smtp.from", Constants.EMAIL);
