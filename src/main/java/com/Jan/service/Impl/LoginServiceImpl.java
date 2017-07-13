@@ -10,6 +10,7 @@ import javax.mail.Address;
 import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
@@ -126,17 +127,23 @@ public class LoginServiceImpl implements LoginService {
 		// 设置超时时间
 		props.getProperty("mail.stmp.timeout", "30000");
 		try {
-			Session session = Session.getInstance(props);
+			Session session = Session.getInstance(props, new Authenticator() {
+				protected PasswordAuthentication getPasswordAuthentication() {
+					return new PasswordAuthentication(Constants.EMAIL, Constants.EMAIL_PW);
+				}
+			});
 			Message msg = new MimeMessage(session);
 			msg.setSubject("May 网站注册码");
 			// 设置邮件内容
 			msg.setText("欢迎注册本网站账号，您的验证码是：" + code.toUpperCase());
 			// 设置发件人
 			msg.setFrom(new InternetAddress(Constants.EMAIL));
-
+			msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
 			Transport tp = session.getTransport();
-			tp.connect(Constants.EMAIL, Constants.EMAIL_PW);
-			tp.sendMessage(msg, new Address[] { new InternetAddress(email) });
+			tp.connect("smtp.mxhichina.com", 465, Constants.EMAIL, Constants.EMAIL_PW);
+			// tp.sendMessage(msg, new Address[] { new InternetAddress(email)
+			// });
+			tp.sendMessage(msg, msg.getAllRecipients());
 			tp.close();
 			return true;
 		} catch (MessagingException e) {
