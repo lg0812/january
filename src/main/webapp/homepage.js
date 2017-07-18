@@ -19,4 +19,6 @@ $(function() {
 	$(".setCover").on("mouseleave", function() {
 		$(this).children().eq(0).removeClass("hasCover-right");
 	});
+	
+	$(".my-slider-basic").css({"background-size":window.screen.width+"px " + window.screen.height + "px;"});
 });
