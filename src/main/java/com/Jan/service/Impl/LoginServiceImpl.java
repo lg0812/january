@@ -115,13 +115,17 @@ public class LoginServiceImpl implements LoginService {
 		// 设置邮件服务器主机名
 		// props.setProperty("mail.host", "smtp.163.com");
 		props.setProperty("mail.host", "smtp.mxhichina.com");
+		// 设置邮件发送端口号
+		// props.setProperty("mail.stmp.port", "25");
+		props.setProperty("mail.smtp.port", "465");
+		props.setProperty("mail.smtp.socketFactory.port", "465");
+		props.setProperty("mail.smtp.socketFactory.fallback", "false");
+		props.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
 		// 发送服务器需要身份验证
 		props.setProperty("mail.smtp.auth", "true");
 		// 设置邮件协议名称
 		props.setProperty("mail.transport.protocol", "smtp");
-		// 设置邮件发送端口号
-		// props.setProperty("mail.stmp.port", "25");
-		props.setProperty("mail.stmp.port", "465");
+
 		// 设置发送人账号
 		// props.getProperty("mail.smtp.from", Constants.EMAIL);
 		// 设置超时时间
@@ -139,12 +143,7 @@ public class LoginServiceImpl implements LoginService {
 			// 设置发件人
 			msg.setFrom(new InternetAddress(Constants.EMAIL));
 			msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
-			Transport tp = session.getTransport();
-			tp.connect("smtp.mxhichina.com", 465, Constants.EMAIL, Constants.EMAIL_PW);
-			// tp.sendMessage(msg, new Address[] { new InternetAddress(email)
-			// });
-			tp.sendMessage(msg, msg.getAllRecipients());
-			tp.close();
+			Transport.send(msg);
 			return true;
 		} catch (MessagingException e) {
 			// TODO Auto-generated catch block
