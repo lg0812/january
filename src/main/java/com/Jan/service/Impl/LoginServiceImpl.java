@@ -1,5 +1,6 @@
 package com.Jan.service.Impl;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.Properties;
 import java.util.Random;
@@ -18,6 +19,7 @@ import javax.mail.internet.MimeMessage;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.hibernate.HibernateException;
 import org.hibernate.NonUniqueResultException;
 import org.hibernate.SessionFactory;
 import org.junit.Test;
@@ -30,6 +32,7 @@ import com.Jan.constant.Constants;
 import com.Jan.model.User;
 import com.Jan.model.VerificationCode;
 import com.Jan.service.LoginService;
+import com.Jan.utils.JavaMailUtils;
 
 @Service
 @Transactional
@@ -106,79 +109,45 @@ public class LoginServiceImpl implements LoginService {
 		}
 	}
 
-	public boolean sendMail(String email, String code) {
-		System.out.println(code);
-		// 阿里云邮箱关于smtp的信息链接：http://mailhelp.mxhichina.com/smartmail/detail.vm?spm=0.0.0.0.6TWdiq&knoId=5871700
-		// TODO Auto-generated method stub
-		Properties props = new Properties();
-		props.setProperty("mail.debug", "true");
-		// 设置邮件服务器主机名
-		// props.setProperty("mail.host", "smtp.163.com");
-		props.setProperty("mail.host", "smtp.mxhichina.com");
-		// 设置邮件发送端口号
-		// props.setProperty("mail.stmp.port", "25");
-		props.setProperty("mail.smtp.port", "465");
-		props.setProperty("mail.smtp.socketFactory.port", "465");
-		props.setProperty("mail.smtp.socketFactory.fallback", "false");
-		props.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-		// 发送服务器需要身份验证
-		props.setProperty("mail.smtp.auth", "true");
-		// 设置邮件协议名称
-		props.setProperty("mail.transport.protocol", "smtp");
-
-		// 设置发送人账号
-		// props.getProperty("mail.smtp.from", Constants.EMAIL);
-		// 设置超时时间
-		props.getProperty("mail.stmp.timeout", "30000");
-		try {
-			Session session = Session.getInstance(props, new Authenticator() {
-				protected PasswordAuthentication getPasswordAuthentication() {
-					return new PasswordAuthentication(Constants.EMAIL, Constants.EMAIL_PW);
-				}
-			});
-			Message msg = new MimeMessage(session);
-			msg.setSubject("May 网站注册码");
-			// 设置邮件内容
-			msg.setText("欢迎注册本网站账号，您的验证码是：" + code.toUpperCase());
-			// 设置发件人
-			msg.setFrom(new InternetAddress(Constants.EMAIL));
-			msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
-			Transport.send(msg);
-			return true;
-		} catch (MessagingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return false;
-		}
-
-	}
-
 	@Override
 	public boolean sendMailSave(String email) {
 		// TODO Auto-generated method stub
 		String verification_code = getRandomString(4);
-		if (sendMail(email, verification_code)) {
-			VerificationCode code = (VerificationCode) sessionFactory.getCurrentSession()
-					.createQuery("from VerificationCode where email='" + email + "'").uniqueResult();
-			if (code != null) {
-				code.setVerification_code(verification_code);
-				code.setSend_time(new Date());
-				// sessionFactory.getCurrentSession().update(code);
-			} else {
-				code = new VerificationCode();
-				code.setEmail(email);
-				code.setVerification_code(verification_code.toUpperCase());
-				code.setSend_time(new Date());
-				sessionFactory.getCurrentSession().save(code);
+		try {
+			if (JavaMailUtils.sendMail(email, verification_code)) {
+				VerificationCode code = (VerificationCode) sessionFactory.getCurrentSession()
+						.createQuery("from VerificationCode where email='" + email + "'").uniqueResult();
+				if (code != null) {
+					code.setVerification_code(verification_code);
+					code.setSend_time(new Date());
+					// sessionFactory.getCurrentSession().update(code);
+				} else {
+					code = new VerificationCode();
+					code.setEmail(email);
+					code.setVerification_code(verification_code.toUpperCase());
+					code.setSend_time(new Date());
+					sessionFactory.getCurrentSession().save(code);
+				}
+				return true;
 			}
-			return true;
+		} catch (HibernateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return false;
 	}
 
 	@Test
 	public void send() {
-		System.out.println(sendMail("2356581512@qq.com", getRandomString(4).toUpperCase()));
+		try {
+			System.out.println(JavaMailUtils.sendMail("18140341063@163.com", getRandomString(4).toUpperCase()));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public String getRandomString(int length) { // length表示生成字符串的长度
