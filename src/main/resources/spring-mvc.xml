@@ -31,7 +31,6 @@
 			</list>
 		</property>
 	</bean>
-	<!-- 配置视图解析器，如何把handler方法返回值解析为实际的物理视图 -->
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/"></property>
@@ -41,7 +40,7 @@
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 
 		<!-- one of the properties available; the maximum file size in bytes -->
-		<!-- 限定为20M -->
+		<!-- limited to 20M -->
 		<property name="maxUploadSize" value="20480000" />
 
 	</bean>
@@ -53,7 +52,6 @@
 
 	<mvc:annotation-driven>
 		<mvc:message-converters register-defaults="true">
-			<!-- 配置Fastjson支持 -->
 			<bean
 				class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
 			</bean>

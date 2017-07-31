@@ -2,6 +2,8 @@ package com.Jan.controller;
 
 import javax.annotation.Resource;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Controller;
@@ -13,7 +15,7 @@ import com.alibaba.fastjson.JSON;
 @Controller
 @RequestMapping("/jedis")
 public class JedisController {
-
+	private static Logger logger = LogManager.getLogger(JedisController.class.getName());
 	@Resource(name = "redisTemplate")
 	private RedisTemplate<String, String> redisTemplate;
 	@Resource(name = "stringRedisTemplate")
@@ -22,6 +24,8 @@ public class JedisController {
 	@RequestMapping("/getFoo")
 	@ResponseBody
 	public String getFoo() {
-		return JSON.toJSONString(stringRedisTemplate.opsForValue().get("foo"));
+		String str = JSON.toJSONString(stringRedisTemplate.opsForValue().get("foo"));
+		logger.info(str);
+		return str;
 	}
 }
