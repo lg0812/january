@@ -26,6 +26,8 @@ public class JedisController {
 	public String getFoo() {
 		String str = JSON.toJSONString(stringRedisTemplate.opsForValue().get("foo"));
 		logger.info(str);
+		logger.debug(System.getenv());
+		logger.debug(System.getProperties());
 		return str;
 	}
 }
