@@ -3,6 +3,12 @@ cd /code/may
 git pull
 if [ $? == 0 ]
 then
+        echo "build start"
+        npm run build
+        if [ $? == 0 ]
+        then
+                echo "build end"
+
                 cd /code/january
                 git pull
                 if [ $? == 0 ]
@@ -17,4 +23,6 @@ then
                 else
                         echo "git pull failed"
                 fi
+        fi
+
 fi
