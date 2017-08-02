@@ -3,6 +3,7 @@ cd /code/may
 git pull
 if [ $? == 0 ]
 then
+                cp /code/may/build/index.html /code/january/src/main/webapp
                 cd /code/january
                 git pull
                 if [ $? == 0 ]
@@ -10,7 +11,6 @@ then
                         mvn clean
                         mvn package -Dmaven.test.skip=true
                         cp ./target/january.war /lg0812/apache-tomcat-8.5.15/webapps
-                        cp /code/may/build/index.html /lg0812/apache-tomcat-8.5.15/webapps/january/
                         rm -rf /lg0812/apache-tomcat-8.5.15/webapps/static
                         cp -rf /code/may/build/static /lg0812/apache-tomcat-8.5.15/webapps
                         tail -f  /lg0812/apache-tomcat-8.5.15/logs/catalina.out
