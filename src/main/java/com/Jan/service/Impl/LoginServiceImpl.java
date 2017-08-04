@@ -143,7 +143,7 @@ public class LoginServiceImpl implements LoginService {
 	@Test
 	public void send() {
 		try {
-			System.out.println(JavaMailUtils.sendMail("18140341063@163.com", getRandomString(4).toUpperCase()));
+			System.out.println(JavaMailUtils.sendMail("2356581512@qq.com", getRandomString(4).toUpperCase()));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

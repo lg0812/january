@@ -154,14 +154,14 @@ public class JavaMailUtils {
 	 * @param code
 	 * @param email
 	 * @param filePath
-	 *            邮件模板，包含特殊符号如：$email $code等,注意该文件编码格式的是GBK
+	 *            邮件模板，包含特殊符号如：$email $code等,注意该文件编码格式的是UTF-8
 	 * @throws MessagingException
 	 * @throws IOException
 	 */
 	public static void HtmlMsgPlaceholder(Message msg, String code, String email, String filePath)
 			throws MessagingException, IOException {
 		msg.setDataHandler(new DataHandler(new ByteArrayDataSource(
-				FileCopyUtils.copyToString(new EncodedResource(new ClassPathResource(filePath), "GBK").getReader())
+				FileCopyUtils.copyToString(new EncodedResource(new ClassPathResource(filePath), "UTF-8").getReader())
 						.replace("$email", email).replace("$code", code),
 				"text/html")));
 	}
