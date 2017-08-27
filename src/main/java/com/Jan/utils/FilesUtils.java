@@ -166,12 +166,12 @@ public class FilesUtils {
 	public static List<Map<String, String>> uploaCompressPicUtils(List<MultipartFile> files, HttpServletRequest req)
 			throws IOException {
 		// 先判断存储文件的文件夹是否存在,若不存在,新建一个
-		File targetFile = new File(req.getSession().getServletContext().getRealPath("/upload"));
+		File targetFile = new File(req.getSession().getServletContext().getRealPath("upload"));
 		if (!targetFile.exists()) {
 			targetFile.mkdir();
 		}
 
-		File outFile = new File(req.getSession().getServletContext().getRealPath("/compress"));
+		File outFile = new File(req.getSession().getServletContext().getRealPath("compress"));
 		if (!outFile.exists()) {
 			outFile.mkdir();
 		}
