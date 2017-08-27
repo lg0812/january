@@ -1,6 +1,9 @@
 package com.Jan.controller;
 
+import java.io.IOException;
+
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
 import org.hibernate.SessionFactory;
@@ -9,7 +12,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.Jan.constant.ApiConsts;
 import com.Jan.constant.BaseResp;
@@ -80,6 +85,33 @@ public class LoginController {
 		} else {
 			baseResp.setCode(ApiConsts.OK);
 			baseResp.setResult(loginService.sendMailSave(email));
+			baseResp.setCode(ApiConsts.OK);
+		}
+		return baseResp;
+	}
+
+	/**
+	 * @param accessToken
+	 * @param username
+	 * @param userLogo
+	 *            可选参数，@RequestParam()中的required=false,可传可不传
+	 * @param req
+	 * @return
+	 * @throws IOException
+	 */
+	@RequestMapping(value = "/updateProfile", method = RequestMethod.POST)
+	@ResponseBody
+	public BaseResp updateProfile(String accessToken, String username,
+			@RequestParam(value = "userLogo", required = false) MultipartFile userLogo, HttpServletRequest req)
+			throws IOException {
+		BaseResp baseResp = new BaseResp();
+		if (StringUtils.isEmpty(accessToken) || StringUtils.isEmpty(username)) {
+			baseResp.setCode(ApiConsts.PARAMS_ERROR);
+			baseResp.setResult(null);
+			baseResp.setMessage("args error");
+		} else {
+			baseResp.setCode(ApiConsts.OK);
+			baseResp.setResult(loginService.updateProfile(accessToken, username, userLogo, req));
 			baseResp.setCode(ApiConsts.OK);
 		}
 		return baseResp;

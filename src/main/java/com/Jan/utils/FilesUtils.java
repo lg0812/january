@@ -154,4 +154,58 @@ public class FilesUtils {
 	// }
 	// return "success";
 	// }
+
+	/**
+	 * @param files
+	 * @param req
+	 *            用户获取ServletContext
+	 * @return 返回一个包括文件存储路径的List<Map> ,map(present,origin)
+	 *         present代表压缩过的图片路径,origin 表示原始图片的路径
+	 * @throws IOException
+	 */
+	public static List<Map<String, String>> uploaCompressPicUtils(List<MultipartFile> files, HttpServletRequest req)
+			throws IOException {
+		// 先判断存储文件的文件夹是否存在,若不存在,新建一个
+		File targetFile = new File(req.getSession().getServletContext().getRealPath("/upload"));
+		if (!targetFile.exists()) {
+			targetFile.mkdir();
+		}
+
+		File outFile = new File(req.getSession().getServletContext().getRealPath("/compress"));
+		if (!outFile.exists()) {
+			outFile.mkdir();
+		}
+
+		// 将文件存到指定的目录下,并命名为uuid+file.getOriginalFilename();
+		@SuppressWarnings("rawtypes")
+		List<Map<String, String>> list = new ArrayList<Map<String, String>>();
+		File single;
+		for (int t = 0; t < files.size(); t++) {
+
+			Map<String, String> map = new HashMap<String, String>();
+			single = new File(targetFile.getPath() + File.separator + UUID.randomUUID().toString()
+					+ files.get(t).getOriginalFilename());
+
+			BufferedImage img = ImageIO.read(files.get(t).getInputStream());
+			if (img != null) {
+				int width = img.getWidth();
+				int height = img.getHeight();
+
+				if (img.getWidth() > 200 || img.getHeight() > 200) {
+					width = 200;
+					height = (int) (200 * (img.getHeight() * 1.0 / img.getWidth()));
+				}
+				BufferedImage bfi = new BufferedImage(width, height, img.getType());
+				bfi.getGraphics().drawImage(img.getScaledInstance(width, height, Image.SCALE_SMOOTH), 0, 0, null);
+				File fff = new File(req.getSession().getServletContext().getRealPath(File.separator + "compress")
+						+ File.separator + UUID.randomUUID().toString() + files.get(t).getOriginalFilename());
+				ImageIO.write(bfi, FilenameUtils.getExtension(files.get(t).getOriginalFilename()), fff);
+				map.put("present", fff.getPath());
+				files.get(t).transferTo(single);
+				map.put("origin", single.getPath());
+				list.add(map);
+			}
+		}
+		return list;
+	}
 }

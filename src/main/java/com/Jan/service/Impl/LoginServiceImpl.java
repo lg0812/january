@@ -2,6 +2,9 @@ package com.Jan.service.Impl;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 import java.util.Random;
 import java.util.UUID;
@@ -16,6 +19,7 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -25,6 +29,7 @@ import org.hibernate.SessionFactory;
 import org.junit.Test;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.Jan.constant.ApiConsts;
 import com.Jan.constant.BaseResp;
@@ -32,6 +37,7 @@ import com.Jan.constant.Constants;
 import com.Jan.model.User;
 import com.Jan.model.VerificationCode;
 import com.Jan.service.LoginService;
+import com.Jan.utils.FilesUtils;
 import com.Jan.utils.JavaMailUtils;
 
 @Service
@@ -57,7 +63,7 @@ public class LoginServiceImpl implements LoginService {
 					baseResp.setCode(ApiConsts.OK);
 					baseResp.setMessage("login success");
 					return new User(user.getId(), user.getUsername(), user.getEmail(), user.getRegister(),
-							user.getAccess_token());
+							user.getUserlogo(), user.getAccess_token());
 				} else {
 					baseResp.setCode(ApiConsts.PW_ERR);
 					baseResp.setMessage("password error!");
@@ -100,7 +106,7 @@ public class LoginServiceImpl implements LoginService {
 			baseResp.setCode(ApiConsts.OK);
 			baseResp.setMessage("register success");
 			baseResp.setResult(new User(user.getId(), user.getUsername(), user.getEmail(), user.getRegister(),
-					user.getAccess_token()));
+					user.getUserlogo(), user.getAccess_token()));
 			return true;
 		} else {
 			baseResp.setCode(ApiConsts.VERIFICATION);
@@ -178,8 +184,8 @@ public class LoginServiceImpl implements LoginService {
 				baseResp.setCode(ApiConsts.OK);
 				baseResp.setMessage("reset success");
 				u.setPassword(password);
-				baseResp.setResult(
-						new User(u.getId(), u.getUsername(), u.getEmail(), u.getRegister(), u.getAccess_token()));
+				baseResp.setResult(new User(u.getId(), u.getUsername(), u.getEmail(), u.getRegister(), u.getUserlogo(),
+						u.getAccess_token()));
 				code.setVerification_code(null);
 				return true;
 			} else {
@@ -192,6 +198,26 @@ public class LoginServiceImpl implements LoginService {
 			baseResp.setCode(ApiConsts.VERIFICATION);
 			baseResp.setMessage("invalid verification code");
 			return false;
+		}
+	}
+
+	@Override
+	public User updateProfile(String accessToken, String username, MultipartFile userLogo, HttpServletRequest req)
+			throws IOException {
+		// TODO Auto-generated method stub
+		User user = (User) sessionFactory.getCurrentSession()
+				.createQuery("from User  where access_token = '" + accessToken + "'").uniqueResult();
+		if (user == null) {
+			return null;
+		} else {
+			user.setUsername(username);
+			if (userLogo != null) {
+				List<MultipartFile> files = new LinkedList<MultipartFile>();
+				files.add(userLogo);
+				List<Map<String, String>> list = FilesUtils.uploaCompressPicUtils(files, req);
+				user.setUserlogo(list.get(0).get("present"));
+			}
+			return user;
 		}
 	}
 

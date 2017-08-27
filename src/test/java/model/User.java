@@ -23,6 +23,8 @@ public class User implements Serializable {
 	@Column
 	private String password;
 	@Column
+	private String userLogo;
+	@Column
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date register;
 	@Column(length = 32)
@@ -76,4 +78,11 @@ public class User implements Serializable {
 		this.register = register;
 	}
 
+	public String getUserLogo() {
+		return userLogo;
+	}
+
+	public void setUserLogo(String userLogo) {
+		this.userLogo = userLogo;
+	}
 }

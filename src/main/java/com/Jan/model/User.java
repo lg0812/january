@@ -23,6 +23,8 @@ public class User implements Serializable {
 	@Column
 	private String password;
 	@Column
+	private String userlogo;
+	@Column
 	private String email;
 
 	public String getEmail() {
@@ -54,11 +56,12 @@ public class User implements Serializable {
 		this.access_token = access_token;
 	}
 
-	public User(int id, String username, String email, Date register, String access_token) {
+	public User(int id, String username, String email, Date register, String userlogo, String access_token) {
 		super();
 		this.id = id;
 		this.username = username;
 		this.email = email;
+		this.userlogo = userlogo;
 		this.register = register;
 		this.access_token = access_token;
 	}
@@ -106,6 +109,14 @@ public class User implements Serializable {
 
 	public void setRegister(Date register) {
 		this.register = register;
+	}
+
+	public String getUserlogo() {
+		return userlogo;
+	}
+
+	public void setUserlogo(String userlogo) {
+		this.userlogo = userlogo;
 	}
 
 }
