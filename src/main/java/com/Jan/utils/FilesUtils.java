@@ -48,8 +48,8 @@ public class FilesUtils {
 		return f.getPath();
 	}
 
-	// @ResponseBody
-	// @RequestMapping(value = "/uploadfiles", method = RequestMethod.POST)
+	 @ResponseBody
+	 @RequestMapping(value = "/uploadfiles", method = RequestMethod.POST)
 	public String uploadfiles(@RequestParam("files") MultipartFile[] files, HttpServletRequest req) throws IOException {
 		// 先判断存储文件的文件夹是否存在,若不存在,新建一个
 		File targetFile = new File(req.getSession().getServletContext().getRealPath("/upload"));
@@ -226,8 +226,7 @@ public class FilesUtils {
 	 *         present代表压缩过的图片路径,origin 表示原始图片的路径
 	 * @throws IOException
 	 */
-	@ResponseBody
-	@RequestMapping(value = "/uploadfiles", method = RequestMethod.POST)
+
 	public static List<Map<String, String>> uploaCompressPicUtils(List<MultipartFile> files, HttpServletRequest req)
 			throws IOException {
 		// 先判断存储文件的文件夹是否存在,若不存在,新建一个
