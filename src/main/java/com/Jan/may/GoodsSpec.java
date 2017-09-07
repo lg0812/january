@@ -44,13 +44,13 @@ public class GoodsSpec {
 		this.id = id;
 	}
 
-	public GoodsInfo getGoodsInfo() {
-		return goodsInfo;
-	}
-
-	public void setGoodsInfo(GoodsInfo goodsInfo) {
-		this.goodsInfo = goodsInfo;
-	}
+//	public GoodsInfo getGoodsInfo() {
+//		return goodsInfo;
+//	}
+//
+//	public void setGoodsInfo(GoodsInfo goodsInfo) {
+//		this.goodsInfo = goodsInfo;
+//	}
 
 	public String getBarcode() {
 		return barcode;

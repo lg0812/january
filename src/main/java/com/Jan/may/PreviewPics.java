@@ -57,12 +57,12 @@ public class PreviewPics {
 		this.status = status;
 	}
 
-	public GoodsInfo getGoodsInfo() {
-		return goodsInfo;
-	}
-
-	public void setGoodsInfo(GoodsInfo goodsInfo) {
-		this.goodsInfo = goodsInfo;
-	}
+//	public GoodsInfo getGoodsInfo() {
+//		return goodsInfo;
+//	}
+//
+//	public void setGoodsInfo(GoodsInfo goodsInfo) {
+//		this.goodsInfo = goodsInfo;
+//	}
 
 }
