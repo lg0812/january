@@ -22,11 +22,69 @@
 <script type="text/javascript" src="../dist/js/swiper.js"></script>
 <script type="text/javascript" src="./js/public.js"></script>
 </head>
-<body>
-	<div id="product_preview" class="swiper-container">
-		<div class="swiper-wrapper"></div>
-		<!-- Add Pagination -->
-		<div class="swiper-pagination"></div>
+<body style="background: #ededed;">
+	<div class="content">
+		<div class="preview-basic">
+			<div id="preview-swiper" class="swiper-container">
+				<div class="swiper-wrapper"></div>
+				<!-- Add Pagination -->
+				<div id="preview-pagination" class="swiper-pagination"></div>
+			</div>
+			<div class="basic-info">
+				<div>
+					<div id="preferentialPrice" class="fl">优惠价</div>
+					<div id="retailPrice" class="fl">零售价</div>
+					<div id="salesVolume" class="fr">已售</div>
+					<div class="clearfix"></div>
+				</div>
+				<div id="goodsName">商品名称</div>
+
+				<div class="right-icon-detail">
+					<div>
+						<span class="right-icon"></span><span><span>正品保证</span> </span>
+					</div>
+					<div>
+						<span class="right-icon"></span><span>7天退货</span>
+					</div>
+					<div>
+						<span class="right-icon"></span><span>快速发货</span>
+					</div>
+					<div>
+						<span class="right-icon"></span><span>假一赔十</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 推荐 -->
+		<div class="recommend pd-normal">
+			<div class="re-header">推荐搭配</div>
+			<div class="re-body">
+				<div id="recommend-swiper" class="swiper-container">
+					<div class="swiper-wrapper"></div>
+				</div>
+			</div>
+		</div>
+		<!-- 评论 -->
+		<div class="comment pd-normal">
+			<div class="co-header">
+				<div class="fl">评论</div>
+				<div class="fr position-rel" style="margin-right: 10px;"
+					onclick="comment.more(this)">
+					查看更多 <span class="pure-rarrow"></span>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			<div class="co-body">
+				<!-- <div class="comment-unit"></div> -->
+			</div>
+		</div>
+		<!-- 详情 -->
+		<div class="goodsDetails pd-normal"></div>
+	</div>
+
+	<div class="float-bg w-100 h-100 d-none"></div>
+	<div class="w-100 h-100 comments-cart" onclick="comment.close(this)">
+		<div id="list" class="w-100 h-75 position-abs" style="bottom: 0px;"></div>
 	</div>
 </body>
 <script type="text/javascript" src="./js/product.js"></script>
