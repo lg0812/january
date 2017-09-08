@@ -31,4 +31,20 @@ public class GoodsController {
 		}
 		return baseResp;
 	}
+
+	@RequestMapping(value = "/enshrine_add", method = RequestMethod.POST)
+	@ResponseBody
+	public BaseResp enshrine_add(String userId, Long goodsId) {
+		BaseResp baseResp = new BaseResp();
+		if (goodsId != null && userId != null) {
+			baseResp.setCode(ApiConsts.OK);
+			baseResp.setResult(goodsService.enshrine_add(userId, goodsId));
+			baseResp.setMessage("获取商品详情成功");
+		} else {
+			baseResp.setCode(ApiConsts.PARAMS_ERROR);
+			baseResp.setResult(null);
+			baseResp.setMessage("userId or goodsId is null");
+		}
+		return baseResp;
+	}
 }

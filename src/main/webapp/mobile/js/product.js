@@ -42,8 +42,9 @@ $(function() {
 
 			/* 显示推荐 */
 
-			if (data.recommend) {
-				for (var t = 0; t < data.recommend.length; t++) {
+			if (data.recommendList && data.recommendList.length > 0) {
+				$(".recommend").removeClass("d-none");
+				for (var t = 0; t < data.recommendList.length; t++) {
 					if (t % 3 == 0) {
 						$("#recommend-swiper > .swiper-wrapper").append(
 								recommend.units());
@@ -51,19 +52,24 @@ $(function() {
 					var ran = parseInt(t / 3) ;
 					console.log(ran)
 					$("#recommend-swiper  .swiper-slide").eq(ran).children().eq(0).append(
-							recommend.unit(data.recommend[t]));
+							recommend.unit(data.recommendList[t]));
 
 				}
+				var recSwiper = new Swiper('#recommend-swiper', {});
 			}
-			var recSwiper = new Swiper('#recommend-swiper', {});
+			
 
 			/* 显示评论:只加载两条 */ 
-			for(var t=0;t<data.comment.length;t++){
-				if(t<2){
-					$(".co-body").append(comment.unit(data.comment[t]));
-				}else{
-					break;
+			if(data.comment && data.comment.length>0){
+				$(".comment").removeClass("d-none");
+				for(var t=0;t<data.comment.length;t++){
+					if(t<2){
+						$(".co-body").append(comment.unit(data.comment[t]));
+					}else{
+						break;
+					}
 				}
+				
 			}
 			/* 显示详情 */
 			$(".goodsDetails").html(data.remark);

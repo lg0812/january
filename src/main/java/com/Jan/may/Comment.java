@@ -17,7 +17,7 @@ public class Comment {
 	String userLogoName;
 	String userLogo;
 	Date createDate;
-	@OneToMany(mappedBy = "comment", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "comment", cascade = CascadeType.ALL, orphanRemoval = true)
 	List<CloudPath> commentPictures;
 	String shopkeeperReply;
 

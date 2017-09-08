@@ -1,5 +1,6 @@
 package com.Jan.may;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -13,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table
@@ -34,20 +36,35 @@ public class GoodsInfo {
 	String shareDesc;// 分享描述
 
 	// @Transient // 不持久化到数据库
-	@OneToMany(mappedBy = "goodsInfo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "goodsInfo", cascade = CascadeType.ALL, orphanRemoval = true)
 	List<PreviewPics> previewPics;// 预览图片
 	// @Transient // 不持久化到数据库
-	@OneToMany(mappedBy = "goodsInfo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "goodsInfo", cascade = CascadeType.ALL, orphanRemoval = true)
 	List<GoodsSpec> GoodsSpec;// 商品规格
 
-	@ManyToOne
-	@JoinColumn(name = "recommend_id")
-	GoodsInfo goodsInfo;
+	@OneToMany(mappedBy = "goodsInfo", cascade = CascadeType.ALL, orphanRemoval = true)
+	List<Recommend> recommend;
 
-	@OneToMany(mappedBy = "goodsInfo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	List<GoodsInfo> recommend;
+	@Transient
+	List<GoodsInfo> recommendList = new ArrayList<GoodsInfo>();
 
-	@OneToMany(mappedBy = "goodsInfo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	public List<GoodsInfo> getRecommendList() {
+		return recommendList;
+	}
+
+	public void setRecommendList(List<GoodsInfo> recommendList) {
+		this.recommendList = recommendList;
+	}
+
+	public List<Recommend> getRecommend() {
+		return recommend;
+	}
+
+	public void setRecommend(List<Recommend> recommend) {
+		this.recommend = recommend;
+	}
+
+	@OneToMany(mappedBy = "goodsInfo", cascade = CascadeType.ALL, orphanRemoval = true)
 	List<Comment> comment;
 
 	public List<Comment> getComment() {
@@ -58,13 +75,13 @@ public class GoodsInfo {
 		this.comment = comment;
 	}
 
-	public List<GoodsInfo> getRecommend() {
-		return recommend;
-	}
-
-	public void setRecommend(List<GoodsInfo> recommend) {
-		this.recommend = recommend;
-	}
+	// public List<GoodsInfo> getRecommend() {
+	// return recommend;
+	// }
+	//
+	// public void setRecommend(List<GoodsInfo> recommend) {
+	// this.recommend = recommend;
+	// }
 
 	public Long getId() {
 		return id;
