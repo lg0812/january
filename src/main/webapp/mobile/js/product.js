@@ -17,7 +17,7 @@ $(function() {
 				$("#preview-swiper > .swiper-wrapper")
 						.append(
 								"<div class='swiper-slide'><img class='prev_img' src='"
-										+ data.previewPics[t].picturePath
+										+ data.previewPics[t].filePath
 										+ "'/></div>");
 
 			var proSwiper = new Swiper('#preview-swiper', {

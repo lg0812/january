@@ -20,6 +20,10 @@ public class CloudPath {
 	@JoinColumn(name = "comment_id")
 	Comment comment;
 
+	@ManyToOne
+	@JoinColumn(name = "goods_id")
+	GoodsInfo goodsInfo;
+	
 	public Long getId() {
 		return id;
 	}

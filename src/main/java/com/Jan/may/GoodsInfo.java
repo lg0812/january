@@ -37,7 +37,7 @@ public class GoodsInfo {
 
 	// @Transient // 不持久化到数据库
 	@OneToMany(mappedBy = "goodsInfo", cascade = CascadeType.ALL, orphanRemoval = true)
-	List<PreviewPics> previewPics;// 预览图片
+	List<CloudPath> previewPics;// 预览图片
 	// @Transient // 不持久化到数据库
 	@OneToMany(mappedBy = "goodsInfo", cascade = CascadeType.ALL, orphanRemoval = true)
 	List<GoodsSpec> GoodsSpec;// 商品规格
@@ -179,20 +179,20 @@ public class GoodsInfo {
 		this.shareDesc = shareDesc;
 	}
 
-	public List<PreviewPics> getPreviewPics() {
-		return previewPics;
-	}
-
-	public void setPreviewPics(List<PreviewPics> previewPics) {
-		this.previewPics = previewPics;
-	}
-
 	public List<GoodsSpec> getGoodsSpec() {
 		return GoodsSpec;
 	}
 
 	public void setGoodsSpec(List<GoodsSpec> goodsSpec) {
 		GoodsSpec = goodsSpec;
+	}
+
+	public List<CloudPath> getPreviewPics() {
+		return previewPics;
+	}
+
+	public void setPreviewPics(List<CloudPath> previewPics) {
+		this.previewPics = previewPics;
 	}
 
 }
