@@ -15,7 +15,7 @@ public class GoodsSpec {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	Long id;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "goodsId")
 	GoodsInfo goodsInfo;
 	String barcode;// 所对应的商品编码
@@ -44,13 +44,13 @@ public class GoodsSpec {
 		this.id = id;
 	}
 
-//	public GoodsInfo getGoodsInfo() {
-//		return goodsInfo;
-//	}
-//
-//	public void setGoodsInfo(GoodsInfo goodsInfo) {
-//		this.goodsInfo = goodsInfo;
-//	}
+	// public GoodsInfo getGoodsInfo() {
+	// return goodsInfo;
+	// }
+	//
+	// public void setGoodsInfo(GoodsInfo goodsInfo) {
+	// this.goodsInfo = goodsInfo;
+	// }
 
 	public String getBarcode() {
 		return barcode;

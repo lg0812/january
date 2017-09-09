@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -15,6 +16,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @Entity
 @Table
@@ -36,14 +40,20 @@ public class GoodsInfo {
 	String shareDesc;// 分享描述
 
 	// @Transient // 不持久化到数据库
-	@OneToMany(mappedBy = "goodsInfo", cascade = CascadeType.ALL, orphanRemoval = true)
-	List<CloudPath> previewPics;// 预览图片
+	@OneToMany(mappedBy = "goodsInfo", orphanRemoval = true)
+	@Fetch(FetchMode.SELECT)
+	@Basic(fetch = FetchType.LAZY)
+	List<CloudPath> previewPics = new ArrayList<CloudPath>();// 预览图片
 	// @Transient // 不持久化到数据库
-	@OneToMany(mappedBy = "goodsInfo", cascade = CascadeType.ALL, orphanRemoval = true)
-	List<GoodsSpec> GoodsSpec;// 商品规格
+	@OneToMany(mappedBy = "goodsInfo", orphanRemoval = true)
+	@Fetch(FetchMode.SELECT)
+	@Basic(fetch = FetchType.LAZY)
+	List<GoodsSpec> GoodsSpec = new ArrayList<GoodsSpec>();// 商品规格
 
-	@OneToMany(mappedBy = "goodsInfo", cascade = CascadeType.ALL, orphanRemoval = true)
-	List<Recommend> recommend;
+	@OneToMany(mappedBy = "goodsInfo", orphanRemoval = true)
+	@Fetch(FetchMode.SELECT)
+	@Basic(fetch = FetchType.LAZY)
+	List<Recommend> recommend = new ArrayList<Recommend>();
 
 	@Transient
 	List<GoodsInfo> recommendList = new ArrayList<GoodsInfo>();

@@ -27,7 +27,7 @@ public class GoodsTag {
 	@JoinColumn(name = "tag_id")
 	GoodsTag tag;
 
-	@OneToMany(mappedBy = "tag", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "tag", cascade = CascadeType.ALL)
 	List<GoodsTag> subs;
 
 }

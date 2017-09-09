@@ -30,7 +30,7 @@
         </Console>
     </Appenders>
     <Loggers>
-        <Root level="trace">
+        <Root level="error">
             <AppenderRef ref="RollingFile"/>
             <AppenderRef ref="file"/>
             <AppenderRef ref="STDOUT"/>
