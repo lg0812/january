@@ -25,12 +25,12 @@ public class GoodsServiceImpl implements GoodsService {
 		// TODO Auto-generated method stub
 		GoodsInfo goodsInfo = (GoodsInfo) sessionFactory.getCurrentSession()
 				.createQuery(String.format("from GoodsInfo where id = %d", goodsId)).uniqueResult();
-		for (Recommend r : goodsInfo.getRecommend()) {
-			GoodsInfo g = (GoodsInfo) sessionFactory.getCurrentSession()
-					.createQuery(String.format("from GoodsInfo where id = %d", r.getRecommendGoodsId())).uniqueResult();
-			if (g != null)
-				goodsInfo.getRecommendList().add(g);
-		}
+//		for (Recommend r : goodsInfo.getRecommend()) {
+//			GoodsInfo g = (GoodsInfo) sessionFactory.getCurrentSession()
+//					.createQuery(String.format("from GoodsInfo where id = %d", r.getRecommendGoodsId())).uniqueResult();
+//			if (g != null)
+//				goodsInfo.getRecommendList().add(g);
+//		}
 		log.info(JSON.toJSONString(goodsInfo));
 		return goodsInfo;
 	}
