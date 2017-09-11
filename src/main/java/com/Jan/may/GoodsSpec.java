@@ -13,28 +13,42 @@ import javax.persistence.*;
 public class GoodsSpec {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	Long id;
+	private Long id;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "goodsId")
-	GoodsInfo goodsInfo;
-	String barcode;// 所对应的商品编码
-	Date created;// 创建者
+	private GoodsInfo goodsInfo;
+	@Column
+	private String barcode;// 所对应的商品编码
+	@Column
+	private Date created;// 创建者
 	// 长宽高 重量
-	Double length;
-	Double width;
-	Double height;
-	Double weight;
+	@Column
+	private Double length;
+	@Column
+	private Double width;
+	@Column
+	private Double height;
+	@Column
+	private Double weight;
 
-	String specCode;// 规格编码
-	String specName;// 规格名称
+	@Column
+	private String specCode;// 规格编码
+	@Column
+	private String specName;// 规格名称
 
-	Double validityDays;// 保质期
-	Integer stock;// 库存
-	Double retailPrice;// 零售价
-	Double preferentialPrice;// 优惠价
-	Double cost;// 成本
-	Integer salesVolume;// 销售量
+	@Column
+	private Double validityDays;// 保质期
+	@Column
+	private Integer stock;// 库存
+	@Column
+	private Double retailPrice;// 零售价
+	@Column
+	private Double preferentialPrice;// 优惠价
+	@Column
+	private Double cost;// 成本
+	@Column
+	private Integer salesVolume;// 销售量
 
 	public Long getId() {
 		return id;

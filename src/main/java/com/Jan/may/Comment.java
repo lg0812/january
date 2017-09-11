@@ -10,20 +10,27 @@ import javax.persistence.*;
 public class Comment {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	Long id;
-	String comment;
-	String userName;
+	@Column
+	private Long id;
+	@Column
+	private String comment;
+	@Column
+	private String userName;
 	@Transient
-	String userLogoName;
-	String userLogo;
-	Date createDate;
+	@Column
+	private String userLogoName;
+	@Column
+	private String userLogo;
+	@Column
+	private Date createDate;
 	@OneToMany(mappedBy = "comment", cascade = CascadeType.ALL, orphanRemoval = true)
-	List<CloudPath> commentPictures;
-	String shopkeeperReply;
+	private List<CloudPath> commentPictures;
+	@Column
+	private String shopkeeperReply;
 
 	@ManyToOne
 	@JoinColumn(name = "goods_id")
-	GoodsInfo goodsInfo;
+	private GoodsInfo goodsInfo;
 
 	public Long getId() {
 		return id;
@@ -88,6 +95,5 @@ public class Comment {
 	public void setShopkeeperReply(String shopkeeperReply) {
 		this.shopkeeperReply = shopkeeperReply;
 	}
-	
-	
+
 }

@@ -1,5 +1,6 @@
 package com.Jan.may;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,9 +12,11 @@ import javax.persistence.Table;
 public class Enshrine {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	Long id;
-	String creator;
-	Long goods_id;
+	private Long id;
+	@Column
+	private String creator;
+	@Column
+	private Long goods_id;
 
 	public Long getId() {
 		return id;

@@ -1,5 +1,6 @@
 package com.Jan.may;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -8,23 +9,26 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
 @Entity
 @Table
 public class CloudPath {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	Long id;
-	String fileName;
-	String filePath;
+	private Long id;
+	@Column
+	private String fileName;
+	@Column
+	private String filePath;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "comment_id")
-	Comment comment;
+	private Comment comment;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "goods_id")
-	GoodsInfo goodsInfo;
-	
+	private GoodsInfo goodsInfo;
+
 	public Long getId() {
 		return id;
 	}
@@ -48,6 +52,5 @@ public class CloudPath {
 	public void setFilePath(String filePath) {
 		this.filePath = filePath;
 	}
-	
-	
+
 }

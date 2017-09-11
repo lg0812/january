@@ -4,15 +4,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Basic;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -25,38 +22,46 @@ import org.hibernate.annotations.FetchMode;
 public class GoodsInfo {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	Long id;
-	Boolean active; // 是否激活
-	Date createDate;// 创建时间
+	private Long id;
+	@Column
+	private Boolean active; // 是否激活
+	@Column
+	private Date createDate;// 创建时间
 
-	String creator;// 创建者
-	String goodsName;// 名称
-	String goodsNo;// 编号
-	String goodsType;// 类型
-	String goodsLogoPath;// logo
-	String remark;//
-	String purchaseDesc;// 购买描述
-	String tags;// 所属分类
-	String shareDesc;// 分享描述
+	@Column
+	private String creator;// 创建者
+	@Column
+	private String goodsName;// 名称
+	@Column
+	private String goodsNo;// 编号
+	@Column
+	private String goodsType;// 类型
+	@Column
+	private String goodsLogoPath;// logo
+	@Column
+	private String remark;//
+	@Column
+	private String purchaseDesc;// 购买描述
+	@Column
+	private String tags;// 所属分类
+	@Column
+	private String shareDesc;// 分享描述
 
 	// @Transient // 不持久化到数据库
 	@OneToMany(mappedBy = "goodsInfo", orphanRemoval = true)
 	@Fetch(FetchMode.SELECT)
-	@Basic(fetch = FetchType.LAZY)
-	List<CloudPath> previewPics = new ArrayList<CloudPath>();// 预览图片
+	private List<CloudPath> previewPics = new ArrayList<CloudPath>();// 预览图片
 	// @Transient // 不持久化到数据库
 	@OneToMany(mappedBy = "goodsInfo", orphanRemoval = true)
 	@Fetch(FetchMode.SELECT)
-	@Basic(fetch = FetchType.LAZY)
-	List<GoodsSpec> GoodsSpec = new ArrayList<GoodsSpec>();// 商品规格
+	private List<GoodsSpec> GoodsSpec = new ArrayList<GoodsSpec>();// 商品规格
 
 	@OneToMany(mappedBy = "goodsInfo", orphanRemoval = true)
 	@Fetch(FetchMode.SELECT)
-	@Basic(fetch = FetchType.LAZY)
-	List<Recommend> recommend = new ArrayList<Recommend>();
+	private List<Recommend> recommend = new ArrayList<Recommend>();
 
 	@Transient
-	List<GoodsInfo> recommendList = new ArrayList<GoodsInfo>();
+	private List<GoodsInfo> recommendList = new ArrayList<GoodsInfo>();
 
 	public List<GoodsInfo> getRecommendList() {
 		return recommendList;
@@ -75,7 +80,7 @@ public class GoodsInfo {
 	}
 
 	@OneToMany(mappedBy = "goodsInfo", cascade = CascadeType.ALL, orphanRemoval = true)
-	List<Comment> comment;
+	private List<Comment> comment;
 
 	public List<Comment> getComment() {
 		return comment;

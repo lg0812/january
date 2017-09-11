@@ -1,5 +1,6 @@
 package com.Jan.may;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -14,12 +15,13 @@ import javax.persistence.Table;
 public class Recommend {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	Long id;
+	private Long id;
 
-	Long recommendGoodsId;
+	@Column
+	private Long recommendGoodsId;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "goods_id")
-	GoodsInfo goodsInfo;
+	private GoodsInfo goodsInfo;
 
 	public Long getRecommendGoodsId() {
 		return recommendGoodsId;
