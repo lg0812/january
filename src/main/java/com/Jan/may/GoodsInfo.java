@@ -48,16 +48,16 @@ public class GoodsInfo {
 	private String shareDesc;// 分享描述
 
 	// @Transient // 不持久化到数据库
-	@OneToMany(mappedBy = "goodsInfo", orphanRemoval = true)
-	@Fetch(FetchMode.SELECT)
+	@OneToMany(mappedBy = "goodsInfo", orphanRemoval = true, cascade = { CascadeType.REMOVE })
+	@Fetch(FetchMode.SUBSELECT)
 	private List<CloudPath> previewPics = new ArrayList<CloudPath>();// 预览图片
 	// @Transient // 不持久化到数据库
-	@OneToMany(mappedBy = "goodsInfo", orphanRemoval = true)
-	@Fetch(FetchMode.SELECT)
+	@OneToMany(mappedBy = "goodsInfo", orphanRemoval = true, cascade = { CascadeType.REMOVE })
+	@Fetch(FetchMode.SUBSELECT)
 	private List<GoodsSpec> GoodsSpec = new ArrayList<GoodsSpec>();// 商品规格
 
-	@OneToMany(mappedBy = "goodsInfo", orphanRemoval = true)
-	@Fetch(FetchMode.SELECT)
+	@OneToMany(mappedBy = "goodsInfo", orphanRemoval = true, cascade = { CascadeType.REMOVE })
+	@Fetch(FetchMode.SUBSELECT)
 	private List<Recommend> recommend = new ArrayList<Recommend>();
 
 	@Transient
