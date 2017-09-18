@@ -31,7 +31,7 @@ public class GoodsServiceImpl implements GoodsService {
 			if (g != null)
 				goodsInfo.getRecommendList().add(g);
 		}
-		log.info(JSON.toJSONString(goodsInfo));
+		// log.info(JSON.toJSONString(goodsInfo));
 		return goodsInfo;
 	}
 

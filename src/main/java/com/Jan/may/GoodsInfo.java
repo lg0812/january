@@ -17,6 +17,8 @@ import javax.persistence.Transient;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table
 public class GoodsInfo {
@@ -49,15 +51,11 @@ public class GoodsInfo {
 
 	// @Transient // 不持久化到数据库
 	@OneToMany(mappedBy = "goodsInfo", orphanRemoval = true, cascade = { CascadeType.REMOVE })
-	@Fetch(FetchMode.SUBSELECT)
 	private List<CloudPath> previewPics = new ArrayList<CloudPath>();// 预览图片
 	// @Transient // 不持久化到数据库
 	@OneToMany(mappedBy = "goodsInfo", orphanRemoval = true, cascade = { CascadeType.REMOVE })
-	@Fetch(FetchMode.SUBSELECT)
 	private List<GoodsSpec> GoodsSpec = new ArrayList<GoodsSpec>();// 商品规格
-
 	@OneToMany(mappedBy = "goodsInfo", orphanRemoval = true, cascade = { CascadeType.REMOVE })
-	@Fetch(FetchMode.SUBSELECT)
 	private List<Recommend> recommend = new ArrayList<Recommend>();
 
 	@Transient
