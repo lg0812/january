@@ -7,21 +7,30 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderColumn;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.IndexColumn;
+import org.hibernate.annotations.ListIndexBase;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table
 public class GoodsInfo {
+
+	public GoodsInfo() {
+		super();
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -50,13 +59,23 @@ public class GoodsInfo {
 	private String shareDesc;// 分享描述
 
 	// @Transient // 不持久化到数据库
-	@OneToMany(mappedBy = "goodsInfo", orphanRemoval = true, cascade = { CascadeType.REMOVE })
+	@OneToMany(mappedBy = "goodsInfo", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OrderColumn
 	private List<CloudPath> previewPics = new ArrayList<CloudPath>();// 预览图片
 	// @Transient // 不持久化到数据库
-	@OneToMany(mappedBy = "goodsInfo", orphanRemoval = true, cascade = { CascadeType.REMOVE })
+	@OneToMany(mappedBy = "goodsInfo", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OrderColumn
 	private List<GoodsSpec> GoodsSpec = new ArrayList<GoodsSpec>();// 商品规格
-	@OneToMany(mappedBy = "goodsInfo", orphanRemoval = true, cascade = { CascadeType.REMOVE })
+	@OneToMany(mappedBy = "goodsInfo", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OrderColumn
 	private List<Recommend> recommend = new ArrayList<Recommend>();
+
+	public GoodsInfo(Long id, String goodsName, String goodsLogoPath) {
+		super();
+		this.id = id;
+		this.goodsName = goodsName;
+		this.goodsLogoPath = goodsLogoPath;
+	}
 
 	@Transient
 	private List<GoodsInfo> recommendList = new ArrayList<GoodsInfo>();
@@ -78,6 +97,7 @@ public class GoodsInfo {
 	}
 
 	@OneToMany(mappedBy = "goodsInfo", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OrderColumn
 	private List<Comment> comment;
 
 	public List<Comment> getComment() {

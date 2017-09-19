@@ -23,11 +23,16 @@ public class GoodsServiceImpl implements GoodsService {
 	@Override
 	public GoodsInfo details(Long goodsId) {
 		// TODO Auto-generated method stub
-		GoodsInfo goodsInfo = (GoodsInfo) sessionFactory.getCurrentSession()
-				.createQuery(String.format("from GoodsInfo where id = %d", goodsId)).uniqueResult();
+		GoodsInfo goodsInfo = sessionFactory.getCurrentSession()
+				.createQuery(String.format("from GoodsInfo where id = %d", goodsId), GoodsInfo.class).uniqueResult();
+		System.out.println(JSON.toJSONString(goodsInfo));
 		for (Recommend r : goodsInfo.getRecommend()) {
-			GoodsInfo g = (GoodsInfo) sessionFactory.getCurrentSession()
-					.createQuery(String.format("from GoodsInfo where id = %d", r.getRecommendGoodsId())).uniqueResult();
+			System.out.println(r.getRecommendGoodsId()+">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+			GoodsInfo g = sessionFactory.getCurrentSession()
+					.createQuery(String.format(
+							"select new GoodsInfo(g.id,g.goodsName, g.goodsLogoPath) from GoodsInfo g where id = %d",
+							r.getRecommendGoodsId()), GoodsInfo.class)
+					.uniqueResult();
 			if (g != null)
 				goodsInfo.getRecommendList().add(g);
 		}
