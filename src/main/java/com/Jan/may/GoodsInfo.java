@@ -22,6 +22,7 @@ import org.hibernate.annotations.IndexColumn;
 import org.hibernate.annotations.ListIndexBase;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 @Entity
 @Table
@@ -64,7 +65,7 @@ public class GoodsInfo {
 	// @Transient // 不持久化到数据库
 	@OneToMany(mappedBy = "goodsInfo", orphanRemoval = true, cascade = CascadeType.ALL)
 	private List<GoodsSpec> GoodsSpec = new ArrayList<GoodsSpec>();// 商品规格
-
+	@JsonIgnore
 	@OneToMany(mappedBy = "goodsInfo", orphanRemoval = true, cascade = CascadeType.ALL)
 	private List<Recommend> recommend = new ArrayList<Recommend>();
 

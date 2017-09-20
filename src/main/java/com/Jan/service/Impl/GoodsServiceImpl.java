@@ -4,6 +4,7 @@ import javax.annotation.Resource;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.hibernate.Hibernate;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,6 +28,10 @@ public class GoodsServiceImpl implements GoodsService {
 		GoodsInfo goodsInfo = sessionFactory.getCurrentSession()
 				.createQuery(String.format("from GoodsInfo where id = %d", goodsId), GoodsInfo.class).uniqueResult();
 		System.out.println(JSON.toJSONString(goodsInfo));
+		Hibernate.initialize(goodsInfo.getComment());
+		Hibernate.initialize(goodsInfo.getGoodsSpec());
+		Hibernate.initialize(goodsInfo.getPreviewPics());
+		Hibernate.initialize(goodsInfo.getRecommend());
 		for (Recommend r : goodsInfo.getRecommend()) {
 			GoodsInfo g = sessionFactory.getCurrentSession()
 					.createQuery(String.format(
