@@ -20,6 +20,7 @@ insert into GoodsSpec(id,retailPrice ,salesVolume,stock,goodsId) values (5,10,10
 
 
 insert into Recommend (id,recommendGoodsId,goods_id) values (1,2,1);
+insert into Recommend (id,recommendGoodsId,goods_id) values (2,3,1);
 
 insert into Enshrine (id,creator,goods_id) values (1,"admin",1);
 insert into Enshrine (id,creator,goods_id) values (2,"admin",2);

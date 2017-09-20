@@ -1,6 +1,7 @@
 package com.Jan.service.Impl;
 
 import javax.annotation.Resource;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.SessionFactory;
@@ -27,7 +28,6 @@ public class GoodsServiceImpl implements GoodsService {
 				.createQuery(String.format("from GoodsInfo where id = %d", goodsId), GoodsInfo.class).uniqueResult();
 		System.out.println(JSON.toJSONString(goodsInfo));
 		for (Recommend r : goodsInfo.getRecommend()) {
-			System.out.println(r.getRecommendGoodsId()+">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 			GoodsInfo g = sessionFactory.getCurrentSession()
 					.createQuery(String.format(
 							"select new GoodsInfo(g.id,g.goodsName, g.goodsLogoPath) from GoodsInfo g where id = %d",

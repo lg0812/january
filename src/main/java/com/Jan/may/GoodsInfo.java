@@ -59,16 +59,25 @@ public class GoodsInfo {
 	private String shareDesc;// 分享描述
 
 	// @Transient // 不持久化到数据库
-	@OneToMany(mappedBy = "goodsInfo", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@OrderColumn
+	@OneToMany(mappedBy = "goodsInfo", orphanRemoval = true, cascade = CascadeType.ALL)
 	private List<CloudPath> previewPics = new ArrayList<CloudPath>();// 预览图片
 	// @Transient // 不持久化到数据库
-	@OneToMany(mappedBy = "goodsInfo", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@OrderColumn
+	@OneToMany(mappedBy = "goodsInfo", orphanRemoval = true, cascade = CascadeType.ALL)
 	private List<GoodsSpec> GoodsSpec = new ArrayList<GoodsSpec>();// 商品规格
-	@OneToMany(mappedBy = "goodsInfo", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@OrderColumn
+
+	@OneToMany(mappedBy = "goodsInfo", orphanRemoval = true, cascade = CascadeType.ALL)
 	private List<Recommend> recommend = new ArrayList<Recommend>();
+
+	@OneToMany(mappedBy = "goodsInfo", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Comment> comment = new ArrayList<Comment>();
+
+	public List<Comment> getComment() {
+		return comment;
+	}
+
+	public void setComment(List<Comment> comment) {
+		this.comment = comment;
+	}
 
 	public GoodsInfo(Long id, String goodsName, String goodsLogoPath) {
 		super();
@@ -94,18 +103,6 @@ public class GoodsInfo {
 
 	public void setRecommend(List<Recommend> recommend) {
 		this.recommend = recommend;
-	}
-
-	@OneToMany(mappedBy = "goodsInfo", cascade = CascadeType.ALL, orphanRemoval = true)
-	@OrderColumn
-	private List<Comment> comment;
-
-	public List<Comment> getComment() {
-		return comment;
-	}
-
-	public void setComment(List<Comment> comment) {
-		this.comment = comment;
 	}
 
 	// public List<GoodsInfo> getRecommend() {
