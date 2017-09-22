@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="dist/vue.js"></script>
+</head>
+<body>
+	<div id="app">{{message}}</div>
+
+	<ol id="app1">
+		<li v-for="todo in todos">{{todo.text}}</li>
+	</ol>
+	<script>
+		var abc = new Vue({
+			el : "#app",
+			data : {
+				message : "vue-dome"
+			}
+		});
+
+		abc.message = "vue-changed";
+
+		var bcd = new Vue({
+			el : "#app1",
+			data : {
+				todos : [ {
+					text : "abc"
+				}, {
+					text : "bcd"
+				}, {
+					text : "cde"
+				} ]
+			}
+		});
+	</script>
+</body>
+</html>
