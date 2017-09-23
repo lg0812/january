@@ -1,6 +1,6 @@
 target/
 .idea/
-.setting/
+.settings/
 .classpath
 january.iml
 app.log
