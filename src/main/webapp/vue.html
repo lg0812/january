@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="dist/vue.js"></script>
+</head>
+<body>
+	<div id="test">
+		{{msg}} <br> 使用v-html输出真正的html
+		<div v-html="real_html"></div>
+	</div>
+	<script type="text/javascript">
+		var app = new Vue({
+			el : "#test",
+			data : {
+				msg : "string msg",
+				real_html : "<div>asdfasdf</div>"
+			}
+		});
+
+		console.log(app.$data.msg)
+	</script>
+
+
+	<div id="example">
+		<p>Original message: "{{ message }}"</p>
+		<p>Computed reversed message: "{{ reversedMessage }}"</p>
+	</div>
+	<script type="text/javascript">
+		var vm = new Vue({
+			el : '#example',
+			data : {
+				message : 'Hello'
+			},
+			computed : {
+				// a computed getter
+				reversedMessage : function() {
+					// `this` points to the vm instance
+					return this.message.split('').reverse().join('')
+				}
+			}
+		})
+		
+		console.log(new Vue())
+	</script>
+</body>
+</html>
