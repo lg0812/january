@@ -2,7 +2,6 @@ target/
 .idea/
 .setting/
 .classpath
-.project
 january.iml
 app.log
 /bin/
