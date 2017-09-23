@@ -21,6 +21,7 @@
 
 	<context:component-scan base-package="com.Jan"></context:component-scan>
 	<import resource="spring-mysql.xml" />
+	<import resource="spring-mybatis.xml" />
 	<import resource="spring-jedis.xml" />
 	<!-- <import resource="spring-rabbitmq.xml" /> -->
 	<bean
