@@ -27,8 +27,14 @@
 		</property>
 	</bean>
 
+	<!-- <bean id="userMapper" class="org.mybatis.spring.mapper.MapperFactoryBean"> 
+		<property name="mapperInterface" value="com.Jan.mappers.UserMapper" /> <property 
+		name="sqlSessionFactory" ref="sqlSessionFactory" /> </bean> -->
 
-	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
-		<constructor-arg index="0" ref="sqlSessionFactory" />
+	<!-- <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate"> 
+		<constructor-arg index="0" ref="sqlSessionFactory" /> </bean> -->
+
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.Jan.mappers" />
 	</bean>
 </beans>

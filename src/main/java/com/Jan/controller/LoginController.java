@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.Jan.constant.ApiConsts;
 import com.Jan.constant.BaseResp;
+import com.Jan.mappers.UserMapper;
 import com.Jan.model.User;
 import com.Jan.model.UserToken;
 import com.Jan.service.LoginService;
@@ -28,6 +29,8 @@ import com.Jan.service.WxService;
 public class LoginController {
 	@Autowired
 	public LoginService loginService;
+	@Autowired
+	private UserMapper userMapper;
 
 	@RequestMapping(value = "/login_in", method = RequestMethod.POST)
 	@ResponseBody
@@ -114,6 +117,16 @@ public class LoginController {
 			baseResp.setResult(loginService.updateProfile(accessToken, username, userLogo, req));
 			baseResp.setCode(ApiConsts.OK);
 		}
+		return baseResp;
+	}
+
+	@RequestMapping(value = "/getUser", method = RequestMethod.GET)
+	@ResponseBody
+	public BaseResp getUser(Long id) throws IOException {
+		BaseResp baseResp = new BaseResp();
+		baseResp.setCode(ApiConsts.OK);
+		baseResp.setResult(this.userMapper.getUser(id));
+		baseResp.setCode(ApiConsts.OK);
 		return baseResp;
 	}
 }

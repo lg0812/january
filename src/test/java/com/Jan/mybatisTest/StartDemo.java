@@ -1,23 +1,34 @@
 package com.Jan.mybatisTest;
 
+import org.apache.ibatis.session.SqlSession;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.Jan.mappers.UserMapper;
+import com.Jan.model.User;
+import com.alibaba.fastjson.JSON;
+
 @RunWith(SpringRunner.class)
-@ContextConfiguration({ "/app-config.xml", "/test-data-access-config.xml" })
+@ContextConfiguration({ "classpath:spring-mvc.xml" })
 @Transactional
 public class StartDemo {
 
-	private SqlSession sqlSession;
+	private UserMapper userMapper;
 
-	public void setSqlSession(SqlSession sqlSession) {
-		this.sqlSession = sqlSession;
+	public void setUserMapper(UserMapper userMapper) {
+		this.userMapper = userMapper;
 	}
 
-	public User getUser(String userId) {
-		return (User) sqlSession.selectOne("org.mybatis.spring.sample.mapper.UserMapper.getUser", userId);
+	public User getUser(Long id) {
+		return this.userMapper.getUser(id);
+	}
+
+	@Test
+	public void ttt() {
+		System.out.println(JSON.toJSONString(getUser(1L)));
 	}
 
 }
