@@ -24,6 +24,8 @@
 			<result column="fileName" property="fileName" jdbcType="VARCHAR" />
 			<result column="filePath" property="filePath" jdbcType="VARCHAR" />
 		</collection>
+		<collection property="GoodsSpec" ofType="com.Jan.may.GoodsSpec">
+		</collection>
 	</resultMap>
 
 	<select id="getGoodsInfoById" parameterType="java.lang.Long"

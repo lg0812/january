@@ -27,7 +27,6 @@ public class GoodsServiceImpl implements GoodsService {
 		// TODO Auto-generated method stub
 		GoodsInfo goodsInfo = sessionFactory.getCurrentSession()
 				.createQuery(String.format("from GoodsInfo where id = %d", goodsId), GoodsInfo.class).uniqueResult();
-		System.out.println(JSON.toJSONString(goodsInfo));
 		Hibernate.initialize(goodsInfo.getComment());
 		Hibernate.initialize(goodsInfo.getGoodsSpec());
 		Hibernate.initialize(goodsInfo.getPreviewPics());
@@ -41,7 +40,7 @@ public class GoodsServiceImpl implements GoodsService {
 			if (g != null)
 				goodsInfo.getRecommendList().add(g);
 		}
-		// log.info(JSON.toJSONString(goodsInfo));
+//		log.info(JSON.toJSONString(goodsInfo));
 		return goodsInfo;
 	}
 
