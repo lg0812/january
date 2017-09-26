@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.Jan.mappers.GoodsInfoMapper">
+
+
+	<resultMap id="goodsInfo" type="com.Jan.may.GoodsInfo">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="active" property="active" jdbcType="BOOLEAN" />
+		<result column="createDate" property="createDate" jdbcType="DATE" />
+		<result column="creator" property="creator" jdbcType="VARCHAR" />
+		<result column="goodsName" property="goodsName" jdbcType="VARCHAR" />
+		<result column="goodsNo" property="goodsNo" jdbcType="VARCHAR" />
+		<result column="goodsType" property="goodsType" jdbcType="VARCHAR" />
+		<result column="goodsLogoPath" property="goodsLogoPath"
+			jdbcType="VARCHAR" />
+		<result column="remark" property="remark" jdbcType="VARCHAR" />
+		<result column="purchaseDesc" property="purchaseDesc" jdbcType="VARCHAR" />
+		<result column="tags" property="tags" jdbcType="VARCHAR" />
+		<result column="shareDesc" property="shareDesc" jdbcType="VARCHAR" />
+
+		<collection property="previewPics" ofType="com.Jan.may.CloudPath">
+			<id column="cloudpath_id" property="id" jdbcType="INTEGER" />
+			<result column="fileName" property="fileName" jdbcType="VARCHAR" />
+			<result column="filePath" property="filePath" jdbcType="VARCHAR" />
+		</collection>
+	</resultMap>
+
+	<select id="getGoodsInfoById" parameterType="java.lang.Long"
+		resultMap="goodsInfo">
+		select
+		g.id,g.active,g.createDate,g.creator,g.goodsName,g.goodsNo,g.goodsType,g.goodsLogoPath,g.remark,g.purchaseDesc,g.tags,g.shareDesc,
+		c.id cloudpath_id,c.fileName,c.filePath
+		from
+		GoodsInfo g,CloudPath c
+		where g.id =
+		c.goods_id and g.id = #{id}
+	</select>
+</mapper>
