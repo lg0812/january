@@ -9,6 +9,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.Jan.may.Comment;
 import com.Jan.may.Enshrine;
 import com.Jan.may.GoodsInfo;
 import com.Jan.may.Recommend;
@@ -28,6 +29,9 @@ public class GoodsServiceImpl implements GoodsService {
 		GoodsInfo goodsInfo = sessionFactory.getCurrentSession()
 				.createQuery(String.format("from GoodsInfo where id = %d", goodsId), GoodsInfo.class).uniqueResult();
 		Hibernate.initialize(goodsInfo.getComment());
+		for (Comment c : goodsInfo.getComment()) {
+			Hibernate.initialize(c.getCommentPictures());
+		}
 		Hibernate.initialize(goodsInfo.getGoodsSpec());
 		Hibernate.initialize(goodsInfo.getPreviewPics());
 		Hibernate.initialize(goodsInfo.getRecommend());
@@ -40,7 +44,7 @@ public class GoodsServiceImpl implements GoodsService {
 			if (g != null)
 				goodsInfo.getRecommendList().add(g);
 		}
-//		log.info(JSON.toJSONString(goodsInfo));
+		// log.info(JSON.toJSONString(goodsInfo));
 		return goodsInfo;
 	}
 
