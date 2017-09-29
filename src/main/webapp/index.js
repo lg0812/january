@@ -41,15 +41,15 @@ function create_menu_() {
 var menu = {
 	"button" : [ {
 		"type" : "view",
-		"name" : "������������",
+		"name" : "我的订单",
 		"url" : "http://ryy-api.xiaokejia.com/public/html/order_list.html"
 	}, {
 		"type" : "view",
-		"name" : "������������",
+		"name" : "我的积分",
 		"url" : "http://ryy-api.xiaokejia.com/public/html/my_points.html"
 	}, {
 		"type" : "view",
-		"name" : "������������",
+		"name" : "我最喜欢",
 		"url" : "http://ryy-api.xiaokejia.com/public/html/my_favourite.html"
 	} ]
 }
