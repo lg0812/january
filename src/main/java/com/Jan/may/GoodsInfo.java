@@ -16,6 +16,7 @@ import javax.persistence.OrderColumn;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.IndexColumn;
@@ -70,6 +71,7 @@ public class GoodsInfo {
 	private List<Recommend> recommend = new ArrayList<Recommend>();
 
 	@OneToMany(mappedBy = "goodsInfo", cascade = CascadeType.ALL, orphanRemoval = true)
+	@BatchSize(size = 2)
 	private List<Comment> comment = new ArrayList<Comment>();
 
 	public List<Comment> getComment() {
