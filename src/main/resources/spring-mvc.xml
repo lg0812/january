@@ -76,4 +76,14 @@
 		<mvc:mapping path="/**" />
 	</mvc:cors>
 
+	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+	<bean class="com.Jan.Aspect.CacheInterceptor" id="cacheInterceptor">
+	</bean>
+	<aop:config>
+		<aop:pointcut id="businessService"
+			expression="execution(* com.Jan.service.CacheService.*(..))" />
+		<aop:aspect ref="cacheInterceptor">
+			<aop:before pointcut-ref="businessService" method="notCache" />
+		</aop:aspect>
+	</aop:config>
 </beans>
