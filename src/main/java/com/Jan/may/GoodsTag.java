@@ -14,8 +14,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 @Entity
 @Table
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class GoodsTag {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,12 +32,12 @@ public class GoodsTag {
 	private Boolean mainClass;
 	@Column
 	private Boolean display;
-	@ManyToOne
-	@JoinColumn(name = "tag_id")
-	private GoodsTag tag;
-
-	@OneToMany(mappedBy = "tag", cascade = CascadeType.ALL)
-	private List<GoodsTag> subs;
+	// @ManyToOne
+	// @JoinColumn(name = "tag_id")
+	// private GoodsTag tag;
+	//
+	// @OneToMany(mappedBy = "tag", cascade = CascadeType.ALL)
+	// private List<GoodsTag> subs;
 
 	public Integer getId() {
 		return id;
@@ -75,20 +79,20 @@ public class GoodsTag {
 		this.display = display;
 	}
 
-	public GoodsTag getTag() {
-		return tag;
-	}
-
-	public void setTag(GoodsTag tag) {
-		this.tag = tag;
-	}
-
-	public List<GoodsTag> getSubs() {
-		return subs;
-	}
-
-	public void setSubs(List<GoodsTag> subs) {
-		this.subs = subs;
-	}
+	// public GoodsTag getTag() {
+	// return tag;
+	// }
+	//
+	// public void setTag(GoodsTag tag) {
+	// this.tag = tag;
+	// }
+	//
+	// public List<GoodsTag> getSubs() {
+	// return subs;
+	// }
+	//
+	// public void setSubs(List<GoodsTag> subs) {
+	// this.subs = subs;
+	// }
 
 }

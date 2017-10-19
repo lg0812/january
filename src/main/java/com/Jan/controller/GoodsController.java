@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.Jan.constant.ApiConsts;
 import com.Jan.constant.BaseResp;
+import com.Jan.may.GoodsTag;
+import com.Jan.service.CacheService;
 import com.Jan.service.GoodsService;
 
 @Controller
@@ -15,6 +17,8 @@ import com.Jan.service.GoodsService;
 public class GoodsController {
 	@Autowired
 	public GoodsService goodsService;
+	@Autowired
+	public CacheService cacheService;
 
 	@RequestMapping(value = "/details", method = RequestMethod.POST)
 	@ResponseBody
@@ -46,5 +50,11 @@ public class GoodsController {
 			baseResp.setMessage("userId or goodsId is null");
 		}
 		return baseResp;
+	}
+
+	@RequestMapping(value = "/getGoodsTag", method = RequestMethod.GET)
+	@ResponseBody
+	public GoodsTag getGoodsTag() {
+		return cacheService.getGoodsTags();
 	}
 }
