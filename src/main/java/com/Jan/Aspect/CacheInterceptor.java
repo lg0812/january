@@ -22,6 +22,5 @@ public class CacheInterceptor {
 		}
 		System.out.println("被代理的对象:" + jp.getTarget());
 		System.out.println("代理对象自己:" + jp.getThis());
-		System.out.println("notCache");
 	}
 }

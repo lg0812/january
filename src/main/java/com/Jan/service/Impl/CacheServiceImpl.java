@@ -21,6 +21,7 @@ public class CacheServiceImpl implements CacheService {
 		return "success";
 	}
 
+	
 	@Override
 	public GoodsTag getGoodsTags() {
 		// TODO Auto-generated method stub

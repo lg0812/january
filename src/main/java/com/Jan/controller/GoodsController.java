@@ -17,8 +17,6 @@ import com.Jan.service.GoodsService;
 public class GoodsController {
 	@Autowired
 	public GoodsService goodsService;
-	@Autowired
-	public CacheService cacheService;
 
 	@RequestMapping(value = "/details", method = RequestMethod.POST)
 	@ResponseBody
@@ -52,9 +50,4 @@ public class GoodsController {
 		return baseResp;
 	}
 
-	@RequestMapping(value = "/getGoodsTag", method = RequestMethod.GET)
-	@ResponseBody
-	public GoodsTag getGoodsTag() {
-		return cacheService.getGoodsTags();
-	}
 }

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ehcache>
 	<!-- 设置缓存的默认数据过期策略 -->
-	<diskStore path="java.io.tmpdir" />
 	<defaultCache maxElementsInMemory="1000" eternal="false"
 		timeToIdleSeconds="1200" timeToLiveSeconds="1200" overflowToDisk="false" />
 </ehcache>
