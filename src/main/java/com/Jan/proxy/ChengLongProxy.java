@@ -20,7 +20,7 @@ public class ChengLongProxy {
 					public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 						// TODO Auto-generated method stub
 						System.out.println("method---->" + method.getName() + "  args--->" + args);
-						return method.invoke(chenglong, args);
+						return method.invoke(proxy, args);
 					}
 				});
 	}
