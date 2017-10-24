@@ -9,10 +9,21 @@
 		<result column="email" property="email" jdbcType="VARCHAR" />
 	</resultMap>
 
-	<select id="getUser" parameterType="java.lang.Long"
-		resultMap="user">
+	<select id="getUser" parameterType="java.lang.Long" resultMap="user">
 		select id,username,password,email from user where id =
 		#{id}
+	</select>
+
+	<!-- 报错：There is no getter for property named 'name' in 'class java.lang.String' -->
+	<!-- 解决方案两种： -->
+	<!-- 1 使用_parameter替换name -->
+	<!-- 2 在UserMapper.java中使用@Param("name") -->
+	<select id="getUsers" resultType="com.Jan.model.User"
+		parameterType="java.lang.String">
+		select * from user where email like "%2356%"
+		<if test="name != null">
+			and username like '${name}'
+		</if>
 	</select>
 </mapper>
 
