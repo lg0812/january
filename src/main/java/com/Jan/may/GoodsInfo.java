@@ -65,7 +65,7 @@ public class GoodsInfo {
 	private List<CloudPath> previewPics = new ArrayList<CloudPath>();// 预览图片
 	// @Transient // 不持久化到数据库
 	@OneToMany(mappedBy = "goodsInfo", orphanRemoval = true, cascade = CascadeType.ALL)
-	private List<GoodsSpec> GoodsSpec = new ArrayList<GoodsSpec>();// 商品规格
+	private List<GoodsSpec> goodsSpec = new ArrayList<GoodsSpec>();// 商品规格
 	@JsonIgnore
 	@OneToMany(mappedBy = "goodsInfo", orphanRemoval = true, cascade = CascadeType.ALL)
 	private List<Recommend> recommend = new ArrayList<Recommend>();
@@ -212,12 +212,13 @@ public class GoodsInfo {
 		this.shareDesc = shareDesc;
 	}
 
+
 	public List<GoodsSpec> getGoodsSpec() {
-		return GoodsSpec;
+		return goodsSpec;
 	}
 
 	public void setGoodsSpec(List<GoodsSpec> goodsSpec) {
-		GoodsSpec = goodsSpec;
+		this.goodsSpec = goodsSpec;
 	}
 
 	public List<CloudPath> getPreviewPics() {

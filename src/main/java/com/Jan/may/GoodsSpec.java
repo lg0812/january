@@ -16,7 +16,7 @@ public class GoodsSpec {
 	private Long id;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "goodsId")
+	@JoinColumn(name = "goods_id")
 	private GoodsInfo goodsInfo;
 	@Column
 	private String barcode;// 所对应的商品编码

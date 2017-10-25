@@ -5,37 +5,60 @@
 
 
 	<resultMap id="goodsInfo" type="com.Jan.may.GoodsInfo">
-		<id column="id" property="id" jdbcType="INTEGER" />
-		<result column="active" property="active" jdbcType="BOOLEAN" />
-		<result column="createDate" property="createDate" jdbcType="DATE" />
-		<result column="creator" property="creator" jdbcType="VARCHAR" />
-		<result column="goodsName" property="goodsName" jdbcType="VARCHAR" />
-		<result column="goodsNo" property="goodsNo" jdbcType="VARCHAR" />
-		<result column="goodsType" property="goodsType" jdbcType="VARCHAR" />
-		<result column="goodsLogoPath" property="goodsLogoPath"
-			jdbcType="VARCHAR" />
-		<result column="remark" property="remark" jdbcType="VARCHAR" />
-		<result column="purchaseDesc" property="purchaseDesc" jdbcType="VARCHAR" />
-		<result column="tags" property="tags" jdbcType="VARCHAR" />
-		<result column="shareDesc" property="shareDesc" jdbcType="VARCHAR" />
-
-		<collection property="previewPics" ofType="com.Jan.may.CloudPath">
-			<id column="cloudpath_id" property="id" jdbcType="INTEGER" />
-			<result column="fileName" property="fileName" jdbcType="VARCHAR" />
-			<result column="filePath" property="filePath" jdbcType="VARCHAR" />
+		<collection property="previewPics" ofType="com.Jan.may.CloudPath"
+			column="id" javaType="ArrayList" select="getPicviewPicsByGoodsId">
 		</collection>
-		<collection property="GoodsSpec" ofType="com.Jan.may.GoodsSpec">
+		<collection property="goodsSpec" ofType="com.Jan.may.GoodsSpec"
+			column="id" javaType="ArrayList" select="getGoodsSpecByGoodsId">
+		</collection>
+		<collection property="recommend" ofType="com.Jan.may.Recommend"
+			column="id" javaType="ArrayList" select="getRecommendByGoodsId">
+		</collection>
+		<collection property="comment" ofType="com.Jan.may.Comment"
+			column="id" javaType="ArrayList" select="getCommentByGoodsId">
 		</collection>
 	</resultMap>
 
 	<select id="getGoodsInfoById" parameterType="java.lang.Long"
 		resultMap="goodsInfo">
-		select
-		g.id,g.active,g.createDate,g.creator,g.goodsName,g.goodsNo,g.goodsType,g.goodsLogoPath,g.remark,g.purchaseDesc,g.tags,g.shareDesc,
-		c.id cloudpath_id,c.fileName,c.filePath
-		from
-		GoodsInfo g,CloudPath c
-		where g.id =
-		c.goods_id and g.id = #{id}
+		select * from GoodsInfo g where g.id = #{id}
+	</select>
+
+	<select id="getPicviewPicsByGoodsId" resultType="com.Jan.may.CloudPath">
+		select * from
+		CloudPath where goods_id = #{id}
+	</select>
+	<select id="getGoodsSpecByGoodsId" resultType="com.Jan.may.GoodsSpec">
+		select * from
+		GoodsSpec where goods_id = #{id}
+	</select>
+	<select id="getRecommendByGoodsId" resultType="com.Jan.may.Recommend">
+		select * from
+		Recommend where goods_id = #{id}
+	</select>
+
+	<select id="getCommentByGoodsId" resultType="com.Jan.may.Comment">
+		select * from
+		Comment
+		where goods_id = #{id}
 	</select>
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

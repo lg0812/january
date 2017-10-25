@@ -12,11 +12,11 @@ insert into GoodsInfo(id,active,createDate,creator,goodsLogoPath,goodsName,goods
 values (3,1,"2017-9-24 12:00:00","admin","http://www.yltfy.cn/january/compress/286ed4ea-909a-48be-81f6-d0b83921a87blogo.jpg","goodsName",
 "no","aaa","desc","details","fenxiang","wu");
 
-insert into GoodsSpec(id,retailPrice ,salesVolume,stock,goodsId) values (1,10,100,11,1);
-insert into GoodsSpec(id,retailPrice ,salesVolume,stock,goodsId) values (2,10,100,11,1);
-insert into GoodsSpec(id,retailPrice ,salesVolume,stock,goodsId) values (3,10,100,11,1);
-insert into GoodsSpec(id,retailPrice ,salesVolume,stock,goodsId) values (4,10,100,11,2);
-insert into GoodsSpec(id,retailPrice ,salesVolume,stock,goodsId) values (5,10,100,11,2);
+insert into GoodsSpec(id,retailPrice ,salesVolume,stock,goods_id) values (1,10,100,11,1);
+insert into GoodsSpec(id,retailPrice ,salesVolume,stock,goods_id) values (2,10,100,11,1);
+insert into GoodsSpec(id,retailPrice ,salesVolume,stock,goods_id) values (3,10,100,11,1);
+insert into GoodsSpec(id,retailPrice ,salesVolume,stock,goods_id) values (4,10,100,11,2);
+insert into GoodsSpec(id,retailPrice ,salesVolume,stock,goods_id) values (5,10,100,11,2);
 
 
 insert into Recommend (id,recommendGoodsId,goods_id) values (1,2,1);
