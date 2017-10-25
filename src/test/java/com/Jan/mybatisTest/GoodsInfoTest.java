@@ -1,7 +1,5 @@
 package com.Jan.mybatisTest;
 
-import java.util.List;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +9,6 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.Jan.mappers.GoodsInfoMapper;
 import com.Jan.may.GoodsInfo;
-import com.Jan.model.User;
 import com.alibaba.fastjson.JSON;
 
 @RunWith(SpringRunner.class)

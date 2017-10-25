@@ -40,8 +40,12 @@
 	<select id="getCommentByGoodsId" resultType="com.Jan.may.Comment">
 		select * from
 		Comment
-		where goods_id = #{id}
+		where
+		Comment.goods_id = #{id}
 	</select>
+
+	<!-- <select id="getCommentPicsByCommentId" resultType="com.Jan.may.CloudPath"> 
+		select * from CloudPath, where comment_id = #{comment_id} </select> -->
 </mapper>
 
 

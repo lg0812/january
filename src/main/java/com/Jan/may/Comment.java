@@ -1,5 +1,6 @@
 package com.Jan.may;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -8,6 +9,15 @@ import javax.persistence.*;
 @Entity
 @Table
 public class Comment {
+	public Comment() {
+	}
+
+	public Comment(String userName, List<CloudPath> commentPictures) {
+		super();
+		this.userName = userName;
+		this.commentPictures = commentPictures;
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
@@ -24,7 +34,7 @@ public class Comment {
 	@Column
 	private Date createDate;
 	@OneToMany(mappedBy = "comment", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<CloudPath> commentPictures;
+	private List<CloudPath> commentPictures = new ArrayList<CloudPath>();
 	@Column
 	private String shopkeeperReply;
 
@@ -86,6 +96,14 @@ public class Comment {
 
 	public void setCommentPictures(List<CloudPath> commentPictures) {
 		this.commentPictures = commentPictures;
+	}
+
+	public GoodsInfo getGoodsInfo() {
+		return goodsInfo;
+	}
+
+	public void setGoodsInfo(GoodsInfo goodsInfo) {
+		this.goodsInfo = goodsInfo;
 	}
 
 	public String getShopkeeperReply() {
