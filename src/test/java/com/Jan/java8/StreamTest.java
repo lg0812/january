@@ -76,7 +76,7 @@ public class StreamTest {
 		}
 		System.out.println(Calendar.getInstance().getTimeInMillis() - start);
 		start = Calendar.getInstance().getTimeInMillis();
-		wordList.parallelStream().map(String::toUpperCase).forEach(System.out::println);
+		wordList.parallelStream().forEach((t) -> System.out.println(t.toUpperCase()));
 		System.out.println(Calendar.getInstance().getTimeInMillis() - start);
 	}
 
