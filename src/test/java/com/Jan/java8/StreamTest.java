@@ -60,7 +60,7 @@ public class StreamTest {
 	 * 3 Short-circuiting：</br>
 	 * anyMatch、 allMatch、 noneMatch、 findFirst、 findAny、 limit
 	 */
-	// @Test
+	@Test
 	public void streamToOthers() {
 		int[] arr = IntStream.range(1, 10).toArray();
 		List<String> wordList = new ArrayList<>();
@@ -69,13 +69,14 @@ public class StreamTest {
 		wordList.add("cde");
 
 		long start = Calendar.getInstance().getTimeInMillis();
-		wordList.stream().map(String::toUpperCase).forEach(System.out::println);
 		System.out.println(Calendar.getInstance().getTimeInMillis() - start);
-
 		start = Calendar.getInstance().getTimeInMillis();
 		for (String str : wordList) {
 			System.out.println(str.toUpperCase());
 		}
+		System.out.println(Calendar.getInstance().getTimeInMillis() - start);
+		start = Calendar.getInstance().getTimeInMillis();
+		wordList.parallelStream().map(String::toUpperCase).forEach(System.out::println);
 		System.out.println(Calendar.getInstance().getTimeInMillis() - start);
 	}
 
@@ -137,7 +138,7 @@ public class StreamTest {
 	 * 构造函数引用 </br>
 	 * 
 	 */
-	@Test
+	// @Test
 	public void construct() {
 		Supplier<Apple> t = Apple::new;
 		Apple a = t.get();
@@ -154,11 +155,11 @@ public class StreamTest {
 		List<Apple> apples = map(weights, Apple::new);
 		System.out.println(JSON.toJSONString(apples));
 
-//		Comparator<Apple> c = (Apple app1, Apple app2) -> {
-//			return (int) (app1.getWeight() - app2.getWeight());
-//		};
-		apples.sort((app1,app2) -> (int) (app1.getWeight() - app2.getWeight()));
-		
+		// Comparator<Apple> c = (Apple app1, Apple app2) -> {
+		// return (int) (app1.getWeight() - app2.getWeight());
+		// };
+		apples.sort((app1, app2) -> (int) (app1.getWeight() - app2.getWeight()));
+
 	}
 
 	public static List<Apple> map(List<Double> list, Function<Double, Apple> f) {
