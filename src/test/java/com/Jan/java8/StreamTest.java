@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
@@ -50,17 +51,18 @@ public class StreamTest {
 
 	/**
 	 * 1 Intermediate：</br>
-	 * map (mapToInt, flatMap 等)、 filter、 distinct、 sorted、 peek、 limit、 skip、
-	 * parallel、 sequential、 unordered </br>
+	 * map (mapToInt, flatMap 等)、 filter、 distinct、 sorted、 peek、
+	 * limit：返回不超过给定长度的流、 skip：跳过给定长度的流、 parallel、 sequential、 unordered </br>
 	 * 
 	 * 2 Terminal： </br>
-	 * forEach、forEachOrdered、 toArray、 reduce、 collect、 min、 max、 count、
-	 * anyMatch、 allMatch、 noneMatch、 findFirst、 findAny、 iterator </br>
+	 * forEach、forEachOrdered、 toArray、 reduce、 collect、 min、 max、
+	 * count：返回流中元素的个数、 anyMatch、 allMatch、 noneMatch、 findFirst、 findAny、
+	 * iterator </br>
 	 * 
 	 * 3 Short-circuiting：</br>
 	 * anyMatch、 allMatch、 noneMatch、 findFirst、 findAny、 limit
 	 */
-	@Test
+	// @Test
 	public void streamToOthers() {
 		int[] arr = IntStream.range(1, 10).toArray();
 		List<String> wordList = new ArrayList<>();
@@ -90,7 +92,7 @@ public class StreamTest {
 		return result;
 	}
 
-	@Test
+	// @Test
 	public void selectApple() {
 		List<Apple> result = new ArrayList<Apple>();
 		result.add(new Apple(1, "red", 120));
@@ -168,5 +170,13 @@ public class StreamTest {
 			result.add(f.apply(e));
 		}
 		return result;
+	}
+
+	// 流 数据筛选
+	@Test
+	public void streamFilter() {
+		List<Dish> menu = Dish.getMenus();
+		menu.stream().filter(Dish::isVegetarian).forEach(System.out::println);
+
 	}
 }
