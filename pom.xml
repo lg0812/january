@@ -19,7 +19,7 @@
 			<id>ubuntu</id>
 			<activation>
 				<os>
-					<family>Linux</family>
+					<family>linux</family>
 				</os>
 			</activation>
 			<properties>
@@ -31,7 +31,7 @@
 			<id>windows</id>
 			<activation>
 				<os>
-					<family>Windows</family>
+					<family>windows</family>
 				</os>
 			</activation>
 			<properties>
