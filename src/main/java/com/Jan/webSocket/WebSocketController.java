@@ -11,14 +11,14 @@ import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
 //@EnableWebSocket
 public class WebSocketController implements WebSocketConfigurer {
 
-	@Override
-	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-		// TODO Auto-generated method stub
-		registry.addHandler(myHandler(), "/echo").setAllowedOrigins("*");
-	}
+    //	@Override
+    public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
+        // TODO Auto-generated method stub
+        registry.addHandler(myHandler(), "/echo").setAllowedOrigins("*");
+    }
 
-	@Bean
-	public WebSocketHandler myHandler() {
-		return new MyHandler();
-	}
+    @Bean
+    public WebSocketHandler myHandler() {
+        return new MyHandler();
+    }
 }
